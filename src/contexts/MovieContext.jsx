@@ -22,12 +22,12 @@ const MovieProvider = ({ children }) => {
     };
 
     const fetchTVList = async () => {
-      const popularTVShows = await tmdbApi.getTVList(tvType.popular);
-      const topRatedTVShows = await tmdbApi.getTVList(tvType.top_rated);
-      const onTheAirTVShows = await tmdbApi.getTVList(tvType.on_the_air);
-      setPopularTVShows(popularTVShows);
-      setTopRatedTVShows(topRatedTVShows);
-      setOnTheAirTVShows(onTheAirTVShows);
+      const popularShows = await tmdbApi.getTVList(tvType.popular);
+      const topRatedShows = await tmdbApi.getTVList(tvType.top_rated);
+      const onTheAirShows = await tmdbApi.getTVList(tvType.on_the_air);
+      setPopularTVShows(popularShows);
+      setTopRatedTVShows(topRatedShows);
+      setOnTheAirTVShows(onTheAirShows);
     };
 
     const fetchUpcomingMovies = async () => {

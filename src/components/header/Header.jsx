@@ -14,12 +14,13 @@ const Header = () => {
 
         <ul className="header__menu">
           <li>
-            {/* <Link to="/movie">Movies</Link> */}
-            <Link to="/">Movies</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            {/* <Link to="/tv">Tv Shows</Link> */}
-            <Link to="/">Tv Shows</Link>
+            <Link to="/movie">Movies</Link>
+          </li>
+          <li>
+            <Link to="/tv">Tv Shows</Link>
           </li>
         </ul>
       </div>

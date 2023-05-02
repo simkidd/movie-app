@@ -1,0 +1,11 @@
+.section {
+    padding: 0 2rem;
+    margin-bottom: 3rem;
+
+    .search__container{}
+    .movie__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+}

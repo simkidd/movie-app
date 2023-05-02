@@ -6,6 +6,8 @@ import {useNavigate} from 'react-router-dom'
 
 const HeroSlideItem = ({item, activeClass}) => {
     const bg = apiConfig.original_image(item.backdrop_path)
+    const navigate = useNavigate()
+    
   return (
     <div className={`slide__item ${activeClass}`} style={{backgroundImage:`url(${bg})`}}>
       <div className="slide__content">
@@ -13,7 +15,7 @@ const HeroSlideItem = ({item, activeClass}) => {
           <h2>{item.title}</h2>
           <p>{item.overview}</p>
           <div className="btns">
-            <OutlineButton title='Watch now' />
+            <OutlineButton title='Watch now' onClick={()=> navigate(`/movie/${item.id}`)} />
           </div>
         </div>
 

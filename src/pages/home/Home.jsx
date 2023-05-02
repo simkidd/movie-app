@@ -7,12 +7,27 @@ import "./home.scss";
 import { OutlineButton } from "../../components/buttons/Button";
 
 const Home = () => {
-  const { popularMovies, topRatedMovies, popularTVShows, topRatedTVShows } =
-    useContext(MovieContext);
+  const {
+    upcomingMovies,
+    popularMovies,
+    topRatedMovies,
+    popularTVShows,
+    topRatedTVShows,
+    onTheAirTVShows,
+  } = useContext(MovieContext);
   return (
     <>
       <HeroSlide />
       <div className="home__container">
+        <div className="section">
+          <div className="section__header">
+            <h2>Upcoming Movies</h2>
+            <Link to="/movie">
+              <OutlineButton title={"View more"} />
+            </Link>
+          </div>
+          <MovieList type={upcomingMovies} />
+        </div>
         <div className="section">
           <div className="section__header">
             <h2>Popular Movies</h2>
@@ -30,6 +45,15 @@ const Home = () => {
             </Link>
           </div>
           <MovieList type={topRatedMovies} />
+        </div>
+        <div className="section">
+          <div className="section__header">
+            <h2>On the Air TV Shows</h2>
+            <Link to="/">
+              <OutlineButton title={"View more"} />
+            </Link>
+          </div>
+          <MovieList type={onTheAirTVShows} />
         </div>
         <div className="section">
           <div className="section__header">

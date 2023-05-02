@@ -11,7 +11,7 @@ const MovieCard = ({item}) => {
       <div className="movie__card" style={{backgroundImage:`url(${bg})`}}>
         <button>play</button>
       </div>
-      <h3>{item.title}</h3>
+      <h3>{item.title || item.name}</h3>
     </Link>
   )
 }
