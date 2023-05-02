@@ -1,0 +1,14 @@
+.home__container{
+
+    .section{
+        padding: 0 2rem;
+        margin-bottom: 3rem;
+
+        &__header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+    }
+}

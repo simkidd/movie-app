@@ -1,0 +1,57 @@
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import HeroSlide from "../../components/hero-slide/HeroSlide";
+import { MovieContext } from "../../contexts/MovieContext";
+import MovieList from "../../components/movie-list/MovieList";
+import "./home.scss";
+import { OutlineButton } from "../../components/buttons/Button";
+
+const Home = () => {
+  const { popularMovies, topRatedMovies, popularTVShows, topRatedTVShows } =
+    useContext(MovieContext);
+  return (
+    <>
+      <HeroSlide />
+      <div className="home__container">
+        <div className="section">
+          <div className="section__header">
+            <h2>Popular Movies</h2>
+            <Link to="/">
+              <OutlineButton title={"View more"} />
+            </Link>
+          </div>
+          <MovieList type={popularMovies} />
+        </div>
+        <div className="section">
+          <div className="section__header">
+            <h2>Top Rated Movies</h2>
+            <Link to="/">
+              <OutlineButton title={"View more"} />
+            </Link>
+          </div>
+          <MovieList type={topRatedMovies} />
+        </div>
+        <div className="section">
+          <div className="section__header">
+            <h2>Popular TV</h2>
+            <Link to="/">
+              <OutlineButton title={"View more"} />
+            </Link>
+          </div>
+          <MovieList type={popularTVShows} />
+        </div>
+        <div className="section">
+          <div className="section__header">
+            <h2>Top Rated TV</h2>
+            <Link to="/">
+              <OutlineButton title={"View more"} />
+            </Link>
+          </div>
+          <MovieList type={topRatedTVShows} />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Home;
