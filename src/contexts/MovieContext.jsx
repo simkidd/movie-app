@@ -1,56 +1,53 @@
-import React, { createContext, useState, useEffect } from "react";
-import tmdbApi, { movieType, tvType } from "../api/tmdbApi";
+import React, { createContext, useState, useEffect } from 'react';
+import tmdbApi, { category, movieType, tvType } from '../api/tmdbApi';
 
 export const MovieContext = createContext();
 
 const MovieProvider = ({ children }) => {
-  const [moviesList, setMoviesList] = useState([]);
-  const [tvList, setTVList] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
-  const [popularTVShows, setPopularTVShows] = useState([]);
-  const [topRatedTVShows, setTopRatedTVShows] = useState([]);
-  const [onTheAirTVShows, setOnTheAirTVShows] = useState([]);
+  const [popularTvShows, setPopularTvShows] = useState([]);
+  const [topRatedTvShows, setTopRatedTvShows] = useState([]);
+  const [onTheAirTvShows, setOnTheAirTvShows] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchMoviesList = async () => {
-      const popularMovies = await tmdbApi.getMoviesList(movieType.popular);
-      const topRatedMovies = await tmdbApi.getMoviesList(movieType.top_rated);
-      setPopularMovies(popularMovies);
-      setTopRatedMovies(topRatedMovies);
+    const fetchData = async () => {
+      try {
+        const upcomingMoviesData = await tmdbApi.getMoviesList(category.movie, movieType.upcoming);
+        const popularMoviesData = await tmdbApi.getMoviesList(category.movie, movieType.popular);
+        const topRatedMoviesData = await tmdbApi.getMoviesList(category.movie, movieType.top_rated);
+        const popularTvShowsData = await tmdbApi.getTvList(category.tv, tvType.popular);
+        const topRatedTvShowsData = await tmdbApi.getTvList(category.tv, tvType.top_rated);
+        const onTheAirTvShowsData = await tmdbApi.getTvList(category.tv, tvType.on_the_air);
+
+        setUpcomingMovies(upcomingMoviesData);
+        setPopularMovies(popularMoviesData);
+        setTopRatedMovies(topRatedMoviesData);
+        setPopularTvShows(popularTvShowsData);
+        setTopRatedTvShows(topRatedTvShowsData);
+        setOnTheAirTvShows(onTheAirTvShowsData);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+      }
     };
 
-    const fetchTVList = async () => {
-      const popularShows = await tmdbApi.getTVList(tvType.popular);
-      const topRatedShows = await tmdbApi.getTVList(tvType.top_rated);
-      const onTheAirShows = await tmdbApi.getTVList(tvType.on_the_air);
-      setPopularTVShows(popularShows);
-      setTopRatedTVShows(topRatedShows);
-      setOnTheAirTVShows(onTheAirShows);
-    };
-
-    const fetchUpcomingMovies = async () => {
-      const upcomingMovies = await tmdbApi.getMoviesList(movieType.upcoming);
-      setUpcomingMovies(upcomingMovies);
-    };
-
-    fetchMoviesList();
-    fetchTVList();
-    fetchUpcomingMovies();
+    fetchData();
   }, []);
 
   return (
     <MovieContext.Provider
       value={{
-        moviesList,
-        tvList,
+        isLoading,
         upcomingMovies,
         popularMovies,
         topRatedMovies,
-        popularTVShows,
-        topRatedTVShows,
-        onTheAirTVShows,
+        popularTvShows,
+        topRatedTvShows,
+        onTheAirTvShows
       }}
     >
       {children}

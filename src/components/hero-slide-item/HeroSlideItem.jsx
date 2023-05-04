@@ -12,7 +12,7 @@ const HeroSlideItem = ({item, activeClass}) => {
     <div className={`slide__item ${activeClass}`} style={{backgroundImage:`url(${bg})`}}>
       <div className="slide__content">
         <div className="content__info">
-          <h2>{item.title}</h2>
+          <h2>{item.title || item.name}</h2>
           <p>{item.overview}</p>
           <div className="btns">
             <OutlineButton title='Watch now' onClick={()=> navigate(`/movie/${item.id}`)} />
@@ -20,7 +20,7 @@ const HeroSlideItem = ({item, activeClass}) => {
         </div>
 
         <div className="content__poster">
-            <img src={apiConfig.w500_image(item.poster_path)} alt="poster" />
+            <img src={apiConfig.w500_image(item.poster_path)} alt={`${item.poster_path}`} />
         </div>
       </div>
     </div>

@@ -3,6 +3,11 @@ import apiConfig from "./apiConfig";
 
 const { api_key, base_url } = apiConfig;
 
+export const category = {
+  movie: "movie",
+  tv: "tv",
+};
+
 export const movieType = {
   upcoming: "upcoming",
   popular: "popular",
@@ -16,52 +21,45 @@ export const tvType = {
 };
 
 const tmdbApi = {
-  getMoviesList: async (type = movieType.popular, page = 1) => {
-    const response = await axios.get(
-      `${base_url}/movie/${type}?api_key=${api_key}&page=${page}`
-    );
+  getMoviesList: async (category, type) => {
+    const url = `${base_url}/${category}/${type}?api_key=${api_key}&language=en-US&page=1`;
+    const response = await axios.get(url);
     return response.data.results;
   },
 
-  getTVList: async (type = tvType.popular, page = 1) => {
-    const response = await axios.get(
-      `${base_url}/tv/${type}?api_key=${api_key}&page=${page}`
-    );
+  getTvList: async (category, type) => {
+    const url = `${base_url}/${category}/${type}?api_key=${api_key}&language=en-US&page=1`;
+    const response = await axios.get(url);
     return response.data.results;
   },
 
-  getVideos: async (type, id) => {
-    const response = await axios.get(
-      `${base_url}/${type}/${id}/videos?api_key=${api_key}`
-    );
+  getVideos: async (category, id) => {
+    const url = `${base_url}/${category}/${id}/videos?api_key=${api_key}&language=en-US`;
+    const response = await axios.get(url);
     return response.data.results;
   },
 
   search: async (query) => {
-    const response = await axios.get(
-      `${base_url}/search/multi?api_key=${api_key}&query=${query}`
-    );
+    const url = `${base_url}/search/multi?api_key=${api_key}&language=en-US&query=${query}&page=1&include_adult=false`;
+    const response = await axios.get(url);
     return response.data.results;
   },
 
-  getDetail: async (type, id) => {
-    const response = await axios.get(
-      `${base_url}/${type}/${id}?api_key=${api_key}`
-    );
+  detail: async (category, id) => {
+    const url = `${base_url}/${category}/${id}?api_key=${api_key}&language=en-US`;
+    const response = await axios.get(url);
     return response.data;
   },
 
-  getCredits: async (type, id) => {
-    const response = await axios.get(
-      `${base_url}/${type}/${id}/credits?api_key=${api_key}`
-    );
-    return response.data;
+  credits: async (category, id) => {
+    const url = `${base_url}/${category}/${id}/credits?api_key=${api_key}`;
+    const response = await axios.get(url);
+    return response.data.cast;
   },
 
-  getSimilar: async (type, id) => {
-    const response = await axios.get(
-      `${base_url}/${type}/${id}/similar?api_key=${api_key}`
-    );
+  similar: async (category, id) => {
+    const url = `${base_url}/${category}/${id}/similar?api_key=${api_key}&language=en-US&page=1`;
+    const response = await axios.get(url);
     return response.data.results;
   },
 };

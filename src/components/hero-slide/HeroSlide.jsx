@@ -6,7 +6,7 @@ import {Autoplay} from 'swiper'
 import "swiper/css";
 import 'swiper/css/autoplay';
 import HeroSlideItem from "../hero-slide-item/HeroSlideItem";
-import tmdbApi, { movieType } from "../../api/tmdbApi";
+import tmdbApi, {category, movieType, tvType } from "../../api/tmdbApi";
 
 const HeroSlide = () => {
   const [movieItems, setMovieItems] = useState([]);
@@ -14,13 +14,10 @@ const HeroSlide = () => {
 
   useEffect(() => {
     const getMovies = async () => {
-      const params = { page: 1 };
-      try {
-        const res = await tmdbApi.getMoviesList(movieType.popular, { params });
-        setMovieItems(res);
-      } catch (error) {
-        console.log(error);
-      }
+      const movieList = await tmdbApi.getMoviesList(category.movie, movieType.popular);
+      const tvList = await tmdbApi.getTvList(category.tv, tvType.popular);
+      const items = [...movieList, ...tvList]
+      setMovieItems(items)
     };
     getMovies();
   }, []);

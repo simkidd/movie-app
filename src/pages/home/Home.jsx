@@ -8,13 +8,19 @@ import { OutlineButton } from "../../components/buttons/Button";
 
 const Home = () => {
   const {
+    isLoading,
     upcomingMovies,
     popularMovies,
     topRatedMovies,
-    popularTVShows,
-    topRatedTVShows,
-    onTheAirTVShows,
+    popularTvShows,
+    topRatedTvShows,
+    onTheAirTvShows
   } = useContext(MovieContext);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  
   return (
     <>
       <HeroSlide />
@@ -53,7 +59,7 @@ const Home = () => {
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          <MovieList type={onTheAirTVShows} />
+          <MovieList type={onTheAirTvShows} />
         </div>
         <div className="section">
           <div className="section__header">
@@ -62,7 +68,7 @@ const Home = () => {
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          <MovieList type={popularTVShows} />
+          <MovieList type={popularTvShows} />
         </div>
         <div className="section">
           <div className="section__header">
@@ -71,7 +77,7 @@ const Home = () => {
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          <MovieList type={topRatedTVShows} />
+          <MovieList type={topRatedTvShows} />
         </div>
       </div>
     </>

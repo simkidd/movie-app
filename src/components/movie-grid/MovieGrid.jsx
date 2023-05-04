@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./movie-grid.scss";
-import MovieCard from "../../components/movie-card/MovieCard";
+import MovieCard from "../movie-card/MovieCard";
 import tmdbApi, { movieType, tvType } from "../../api/tmdbApi";
 
 const MovieGrid = ({ type }) => {
@@ -12,13 +12,13 @@ const MovieGrid = ({ type }) => {
     const getList = async () => {
       try {
         let response = null;
-        const params = {};
+        const params = {page};
         switch (type) {
           case "movie":
-            response = await tmdbApi.getMoviesList(movieType.upcoming, {params});
+            response = await tmdbApi.getMoviesList(movieType.upcoming, page);
             break;
             default:
-            response = await tmdbApi.getTVList(tvType.popular, {params});
+            response = await tmdbApi.getTVList(tvType.popular, page);
         }
         setItems(response)
         setTotalPages(response.total_pages)

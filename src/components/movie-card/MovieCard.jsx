@@ -7,7 +7,7 @@ const MovieCard = ({item}) => {
   const bg = apiConfig.w500_image(item.poster_path)
 
   return (
-    <Link to={`/movie/${item.id}`}>
+    <Link to={`/${item.media_type}/${item.id}`}>
       <div className="movie__card" style={{backgroundImage:`url(${bg})`}}>
         <button>play</button>
       </div>
