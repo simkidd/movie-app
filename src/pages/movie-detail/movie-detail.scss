@@ -34,6 +34,7 @@
     margin-top: -300px;
     position: relative;
     padding: 0 2rem;
+    margin-bottom: 5rem;
 
     .content__poster{
         flex: 1;
@@ -73,5 +74,17 @@
         p{
             margin-bottom: 2rem;
         }
+    }
+}
+
+.bottom__content{
+    max-width: 1260px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .section{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
