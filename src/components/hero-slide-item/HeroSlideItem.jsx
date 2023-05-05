@@ -20,7 +20,7 @@ const HeroSlideItem = ({item, activeClass}) => {
         </div>
 
         <div className="content__poster">
-            <img src={apiConfig.w500_image(item.poster_path)} alt={`${item.poster_path}`} />
+            <img src={apiConfig.w500_image(item.poster_path)} alt={item.poster_path} />
         </div>
       </div>
     </div>
