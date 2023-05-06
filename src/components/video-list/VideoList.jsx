@@ -21,7 +21,6 @@ const VideoList = ({ item, id }) => {
       } else {
         setShowTrailer(false);
       }
-      console.log(trailer);
     };
     getTrailerKey();
   }, [category, id]);

@@ -5,6 +5,7 @@ import { MovieContext } from "../../contexts/MovieContext";
 import MovieList from "../../components/movie-list/MovieList";
 import "./home.scss";
 import { OutlineButton } from "../../components/buttons/Button";
+import { category } from "../../api/tmdbApi";
 
 const Home = () => {
   const {
@@ -32,7 +33,7 @@ const Home = () => {
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          <MovieList type={upcomingMovies} />
+          <MovieList type={upcomingMovies} category={category.movie} />
         </div>
         <div className="section">
           <div className="section__header">
@@ -41,7 +42,7 @@ const Home = () => {
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          <MovieList type={popularMovies} />
+          <MovieList type={popularMovies} category={category.movie} />
         </div>
         <div className="section">
           <div className="section__header">
@@ -50,7 +51,7 @@ const Home = () => {
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          <MovieList type={topRatedMovies} />
+          <MovieList type={topRatedMovies} category={category.movie} />
         </div>
         <div className="section">
           <div className="section__header">
@@ -59,7 +60,7 @@ const Home = () => {
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          <MovieList type={onTheAirTvShows} />
+          <MovieList type={onTheAirTvShows} category={category.tv} />
         </div>
         <div className="section">
           <div className="section__header">
@@ -68,7 +69,7 @@ const Home = () => {
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          <MovieList type={popularTvShows} />
+          <MovieList type={popularTvShows} category={category.tv} />
         </div>
         <div className="section">
           <div className="section__header">
@@ -77,7 +78,7 @@ const Home = () => {
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          <MovieList type={topRatedTvShows} />
+          <MovieList type={topRatedTvShows} category={category.tv} />
         </div>
       </div>
     </>
