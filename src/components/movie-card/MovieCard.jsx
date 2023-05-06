@@ -4,10 +4,13 @@ import apiConfig from '../../api/apiConfig';
 import './movie-card.scss'
 import { category } from '../../api/tmdbApi';
 
-const MovieCard = ({item, cat}) => {
+const MovieCard = ({item}) => {
   const bg = apiConfig.w500_image(item.poster_path)
 
-  const link = '/'+ category[cat] + '/' + item.id;
+  const link = item.media_type === 'movie' ? `/movie/${item.id}` : `/tv/${item.id}`;
+
+  console.log(link)
+
   
 
   return (

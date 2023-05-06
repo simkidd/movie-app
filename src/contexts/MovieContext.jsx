@@ -22,12 +22,12 @@ const MovieProvider = ({ children }) => {
         const topRatedTvShowsData = await tmdbApi.getTvList(category.tv, tvType.top_rated);
         const onTheAirTvShowsData = await tmdbApi.getTvList(category.tv, tvType.on_the_air);
 
-        setUpcomingMovies(upcomingMoviesData);
-        setPopularMovies(popularMoviesData);
-        setTopRatedMovies(topRatedMoviesData);
-        setPopularTvShows(popularTvShowsData);
-        setTopRatedTvShows(topRatedTvShowsData);
-        setOnTheAirTvShows(onTheAirTvShowsData);
+        setUpcomingMovies(upcomingMoviesData.results);
+        setPopularMovies(popularMoviesData.results);
+        setTopRatedMovies(topRatedMoviesData.results);
+        setPopularTvShows(popularTvShowsData.results);
+        setTopRatedTvShows(topRatedTvShowsData.results);
+        setOnTheAirTvShows(onTheAirTvShowsData.results);
         setIsLoading(false);
       } catch (error) {
         console.log(error);

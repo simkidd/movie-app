@@ -60,6 +60,15 @@ const MovieDetail = () => {
             )}
             {item.runtime && <p>Runtime: {item.runtime} minutes</p>}
           </div>
+          {/* <div className="movie__rating">
+            {item ? item.vote_average : ""}{" "}
+            <i class="fas fa-star" />
+            <span className="movie__voteCount">
+              {item
+                ? "(" + item.vote_count + ") votes"
+                : ""}
+            </span>
+          </div> */}
           <div className="casts">
             <div className="section__header">
               <h2>Casts</h2>

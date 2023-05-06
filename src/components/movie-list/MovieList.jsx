@@ -3,7 +3,7 @@ import './movie-list.scss'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import MovieCard from '../movie-card/MovieCard'
 
-const MovieList = ({type, category}) => {
+const MovieList = ({type}) => {
 
   return (
     <div className='movie__list'>
@@ -15,7 +15,7 @@ const MovieList = ({type, category}) => {
         {type.map((item, i) => {
             return (
               <SwiperSlide key={i}>
-                <MovieCard item={item} category={category} />
+                <MovieCard item={item} />
               </SwiperSlide>
             )
         })}

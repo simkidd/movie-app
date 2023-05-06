@@ -24,13 +24,13 @@ const tmdbApi = {
   getMoviesList: async (category, type) => {
     const url = `${base_url}/${category}/${type}?api_key=${api_key}&language=en-US&page=1`;
     const response = await axios.get(url);
-    return response.data.results;
+    return response.data;
   },
-
+  
   getTvList: async (category, type) => {
     const url = `${base_url}/${category}/${type}?api_key=${api_key}&language=en-US&page=1`;
     const response = await axios.get(url);
-    return response.data.results;
+    return response.data;
   },
 
   getVideos: async (category, id) => {
