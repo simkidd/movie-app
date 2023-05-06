@@ -27,18 +27,22 @@ const MovieGrid = ({ category }) => {
     getList();
   }, [category]);
 
-  const handleLoadMore = async() => {
+  const handleLoadMore = async () => {
     try {
-      let res = []
+      let res = [];
       if (category === cat.movie) {
-        res = await tmdbApi.getMoviesList(cat.movie, movieType.popular, page + 1);
+        res = await tmdbApi.getMoviesList(
+          cat.movie,
+          movieType.popular,
+          page + 1
+        );
       } else if (category === cat.tv) {
         res = await tmdbApi.getTvList(cat.tv, tvType.popular, page + 1);
       }
-      setItems([...items,...res.results]);
+      setItems([...items, ...res.results]);
       setPage(page + 1);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -48,12 +52,12 @@ const MovieGrid = ({ category }) => {
 
       <div className="movie__grid">
         {items.map((item, i) => (
-          <MovieCard key={i} item={item} />
+          <MovieCard key={i} item={item} category={category} />
         ))}
       </div>
 
       {page < totalPage ? (
-        <OutlineButton onClick={handleLoadMore} title={'Load More'} />
+        <OutlineButton onClick={handleLoadMore} title={"Load More"} />
       ) : null}
     </div>
   );

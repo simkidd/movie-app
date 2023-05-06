@@ -14,13 +14,13 @@ const Home = () => {
     topRatedMovies,
     popularTvShows,
     topRatedTvShows,
-    onTheAirTvShows
+    onTheAirTvShows,
   } = useContext(MovieContext);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  
+
   return (
     <>
       <HeroSlide />
