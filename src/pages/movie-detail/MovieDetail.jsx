@@ -93,7 +93,7 @@ const MovieDetail = () => {
           <div className="section__header">
             <h2>Similiar</h2>
           </div>
-          <MovieList type={similarMovies} />
+          <MovieList type={similarMovies} category={category} />
         </div>
       </div>
     </>
