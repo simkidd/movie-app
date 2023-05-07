@@ -57,7 +57,7 @@ const MovieGrid = ({ category }) => {
       </div>
 
       {page < totalPage ? (
-        <OutlineButton onClick={handleLoadMore} title={"Load More"} />
+        <OutlineButton onClick={handleLoadMore} title={"Load More"}  />
       ) : null}
     </div>
   );

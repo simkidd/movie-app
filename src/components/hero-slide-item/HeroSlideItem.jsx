@@ -1,7 +1,7 @@
 import React from "react";
 import "./hero-slide-item.scss"
 import apiConfig from "../../api/apiConfig";
-import { OutlineButton } from "../buttons/Button";
+import Button, { OutlineButton } from "../buttons/Button";
 import {useNavigate} from 'react-router-dom'
 
 const HeroSlideItem = ({item, activeClass}) => {
@@ -15,7 +15,7 @@ const HeroSlideItem = ({item, activeClass}) => {
           <h2>{item.title || item.name}</h2>
           <p>{item.overview}</p>
           <div className="btns">
-            <OutlineButton title='Watch now' onClick={()=> navigate(`/movie/${item.id}`)} />
+            <Button title='Watch now' onClick={()=> navigate(`/movie/${item.id}`)} />
           </div>
         </div>
 

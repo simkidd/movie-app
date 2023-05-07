@@ -36,11 +36,17 @@
             position: relative;
             width: 55%;
             padding: 0 3rem;
+            @media screen and (max-width: 1024px) {
+                width: 100%;
+            }
 
             h2{
                 font-size: 3rem;
                 font-weight: 700;
                 line-height: 1;
+                @media screen and (max-width: 1024px){
+                    font-size: 2rem;
+                }
             }
             
             p{
@@ -61,6 +67,9 @@
             align-items: center;
             justify-content: flex-start;
             position: relative;
+            @media screen and (max-width:1024px){
+                display: none;
+            }
 
             img{
                 width: 400px;

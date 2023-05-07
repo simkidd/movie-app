@@ -1,12 +1,12 @@
 import React from "react";
 import "./buttons.scss";
 
-const Button = ({title}) => {
-  return <button className="btn">{title}</button>;
+const Button = ({title, className}) => {
+  return <button className={`btn ${className}`}>{title}</button>;
 };
 
-export const OutlineButton = ({title, onClick}) => {
-  return <button className="btn btn__outline small" onClick={onClick}>{title}</button>;
+export const OutlineButton = ({title, onClick, className}) => {
+  return <button className={`btn btn__outline small ${className}`} onClick={onClick}>{title}</button>;
 };
 
 export default Button;
