@@ -10,13 +10,20 @@ import VideoList from "../../components/video-list/VideoList";
 const MovieDetail = () => {
   const { category, id } = useParams();
   const [item, setItem] = useState(null);
+  const [similarMovies, setSimilarMovies] = useState([]);
 
   useEffect(() => {
     const getDetail = async () => {
       const res = await tmdbApi.detail(category, id);
       setItem(res);
     };
+
+    const getSimilarMovies = async () => {
+      const res = await tmdbApi.similar(category, id);
+      setSimilarMovies(res);
+    }
     getDetail();
+    getSimilarMovies();
   }, [category, id]);
 
   if (!item) {
@@ -79,15 +86,15 @@ const MovieDetail = () => {
       </div>
 
       <div className="bottom__content">
-        <div className="section">
+        <div className="section trailer__section">
           <VideoList item={item} id={item.id} />
         </div>
-        {/* <div className="section">
+        <div className="section">
           <div className="section__header">
             <h2>Similiar</h2>
           </div>
-          <MovieList />
-        </div> */}
+          <MovieList type={similarMovies} />
+        </div>
       </div>
     </>
   );

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./hero-slide.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
-import {Autoplay} from 'swiper'
+import { Autoplay } from "swiper";
 // import swiper styles
 import "swiper/css";
-import 'swiper/css/autoplay';
+import "swiper/css/autoplay";
 import HeroSlideItem from "../hero-slide-item/HeroSlideItem";
-import tmdbApi, {category, movieType, tvType } from "../../api/tmdbApi";
+import tmdbApi, { category, movieType, tvType } from "../../api/tmdbApi";
 
 const HeroSlide = () => {
   const [movieItems, setMovieItems] = useState([]);
@@ -14,18 +14,21 @@ const HeroSlide = () => {
 
   useEffect(() => {
     const getMovies = async () => {
-      const movieList = await tmdbApi.getMoviesList(category.movie, movieType.popular);
+      const movieList = await tmdbApi.getMoviesList(
+        category.movie,
+        movieType.popular
+      );
       const tvList = await tmdbApi.getTvList(category.tv, tvType.popular);
-      const items = [...movieList.results, ...tvList.results]
-      
-      setMovieItems(items)
+      const items = [...movieList.results, ...tvList.results];
+
+      setMovieItems(items);
     };
     getMovies();
   }, []);
 
-  useEffect(()=>{
-    setRandomOrder(shuffle(movieItems))
-  },[movieItems])
+  useEffect(() => {
+    setRandomOrder(shuffle(movieItems));
+  }, [movieItems]);
 
   const shuffle = (array) => {
     let currentIndex = array.length;
@@ -42,14 +45,14 @@ const HeroSlide = () => {
 
   return (
     <div className="hero__slide">
-      <Swiper 
-      slidesPerView={1} 
-      grabCursor={true} 
-      modules={[Autoplay]}
-      autoplay={{
-        delay: 10000,
-        disableOnInteraction: false,
-      }}
+      <Swiper
+        slidesPerView={1}
+        grabCursor={true}
+        modules={[Autoplay]}
+        autoplay={{
+          delay: 10000,
+          disableOnInteraction: false,
+        }}
       >
         {randomOrder.map((item, i) => {
           return (
@@ -58,6 +61,7 @@ const HeroSlide = () => {
                 <HeroSlideItem
                   item={item}
                   activeClass={`${isActive ? "active" : ""} `}
+                  category={category}
                 />
               )}
             </SwiperSlide>
