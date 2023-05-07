@@ -16,13 +16,13 @@ const MovieDetail = () => {
     const getDetail = async () => {
       const res = await tmdbApi.detail(category, id);
       setItem(res);
-      window.scrollTo(0,0)
+      window.scrollTo(0, 0);
     };
 
     const getSimilarMovies = async () => {
       const res = await tmdbApi.similar(category, id);
       setSimilarMovies(res);
-    }
+    };
     getDetail();
     getSimilarMovies();
   }, [category, id]);
@@ -52,23 +52,24 @@ const MovieDetail = () => {
           ></div>
         </div>
         <div className="content__info">
-          <h1>{item.title || item.name}</h1>
-          <div className="genres">
-            {item.genres &&
-              item.genres
-                .slice(0, 5)
-                .map((genre, i) => <span key={i}>{genre.name}</span>)}
-          </div>
-          <p>{item.overview}</p>
-          <div className="release">
-            {item.release_date ? (
-              <p>Release Date: {item.release_date}</p>
-            ) : (
-              <p>Air Date: {item.first_air_date}</p>
-            )}
-            {item.runtime && <p>Runtime: {item.runtime} minutes</p>}
-          </div>
-          {/* <div className="movie__rating">
+          <div className="container">
+            <h1>{item.title || item.name}</h1>
+            <div className="genres">
+              {item.genres &&
+                item.genres
+                  .slice(0, 5)
+                  .map((genre, i) => <span key={i}>{genre.name}</span>)}
+            </div>
+            <p>{item.overview}</p>
+            <div className="release">
+              {item.release_date ? (
+                <p>Release Date: {item.release_date}</p>
+              ) : (
+                <p>Air Date: {item.first_air_date}</p>
+              )}
+              {item.runtime && <p>Runtime: {item.runtime} minutes</p>}
+            </div>
+            {/* <div className="movie__rating">
             {item ? item.vote_average : ""}{" "}
             <i class="fas fa-star" />
             <span className="movie__voteCount">
@@ -77,11 +78,12 @@ const MovieDetail = () => {
                 : ""}
             </span>
           </div> */}
-          <div className="casts">
-            <div className="section__header">
-              <h2>Casts</h2>
+            <div className="casts">
+              <div className="section__header">
+                <h2>Casts</h2>
+              </div>
+              <CastList id={item.id} />
             </div>
-            <CastList id={item.id} />
           </div>
         </div>
       </div>

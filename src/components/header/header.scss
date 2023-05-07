@@ -60,6 +60,9 @@
                 &:hover::after {
                     width: 100%;
                 }
+                &.active{
+                    color: #ff0000;
+                }
             }
         }
     }
