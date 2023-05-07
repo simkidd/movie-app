@@ -1,4 +1,5 @@
 import React from "react";
+import './video.scss'
 
 const Video = ({ item, showTrailer, trailerKey }) => {
   return (

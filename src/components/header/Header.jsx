@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./header.scss";
 
 const Header = () => {
+  const {pathname} = useLocation();
+
   return (
     <div className="header">
       <div className="header__container">
@@ -13,13 +15,13 @@ const Header = () => {
         </div>
 
         <ul className="header__menu">
-          <li>
+          <li className={pathname === '/' ? 'active' : ''}>
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li className={pathname === '/movie' ? 'active' : ''}>
             <Link to="/movie">Movies</Link>
           </li>
-          <li>
+          <li className={pathname === '/tv' ? 'active' : ''}>
             <Link to="/tv">Tv Shows</Link>
           </li>
         </ul>
