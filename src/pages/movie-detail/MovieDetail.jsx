@@ -16,6 +16,7 @@ const MovieDetail = () => {
     const getDetail = async () => {
       const res = await tmdbApi.detail(category, id);
       setItem(res);
+      window.scrollTo(0,0)
     };
 
     const getSimilarMovies = async () => {
