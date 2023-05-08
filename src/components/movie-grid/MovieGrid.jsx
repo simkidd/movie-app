@@ -40,11 +40,7 @@ const MovieGrid = ({ category }) => {
       } else if (category === cat.tv) {
         res = await tmdbApi.getTvList(cat.tv, tvType.popular, page + 1);
       }
-      // filter out duplicates
-      const newItems = res.results.filter((result) => {
-        return !items.some((item) => item.id === result.id);
-      });
-      setItems([...items, ...newItems]);
+      setItems([...items, ...res.results]);
       setPage(page + 1);
     } catch (error) {
       console.log(error);
