@@ -3,10 +3,19 @@
     backdrop-filter: blur(10px);
     position: relative;
     padding: 6rem 2rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media screen and (max-width: 768px) {
+        
+    }
     
     &__content{
         max-width: 1000px;
         margin: auto;
+        display: flex;
+        flex-direction: column;
 
         .content__logo{
             display: flex;
@@ -17,8 +26,11 @@
         .content__menu{
             display: grid;
             grid-template-columns: repeat(3, 1fr);
+            margin-bottom: 4rem;
+            gap: 4rem;
             @media screen and (max-width: 768px) {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
             }
 
             .menu__list{
@@ -31,6 +43,16 @@
                 a{
                     margin-top: 1rem;
                 }
+            }
+        }
+    }
+
+    .footer__bottom{
+        p{
+            font-size: 1rem;
+            font-weight: 400;
+            @media screen and (max-width: 768px) {
+                font-size: 100%;
             }
         }
     }
