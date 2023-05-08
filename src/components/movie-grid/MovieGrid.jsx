@@ -3,6 +3,7 @@ import "./movie-grid.scss";
 import MovieCard from "../movie-card/MovieCard";
 import tmdbApi, { category as cat, movieType, tvType } from "../../api/tmdbApi";
 import { OutlineButton } from "../buttons/Button";
+import Meta from "../helmet/Meta";
 
 const MovieGrid = ({ category }) => {
   const [items, setItems] = useState([]);
@@ -39,7 +40,11 @@ const MovieGrid = ({ category }) => {
       } else if (category === cat.tv) {
         res = await tmdbApi.getTvList(cat.tv, tvType.popular, page + 1);
       }
-      setItems([...items, ...res.results]);
+      // filter out duplicates
+      const newItems = res.results.filter((result) => {
+        return !items.some((item) => item.id === result.id);
+      });
+      setItems([...items, ...newItems]);
       setPage(page + 1);
     } catch (error) {
       console.log(error);
@@ -48,6 +53,7 @@ const MovieGrid = ({ category }) => {
 
   return (
     <>
+    <Meta title={`${category === cat.movie ? "Movies" : "TV Shows"}`} />
       <div className="section">
         <div className="search__container">//search is here...</div>
       </div>

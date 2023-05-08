@@ -6,6 +6,7 @@ import apiConfig from "../../api/apiConfig";
 import MovieList from "../../components/movie-list/MovieList";
 import CastList from "../../components/cast-list/CastList";
 import VideoList from "../../components/video-list/VideoList";
+import Meta from "../../components/helmet/Meta";
 
 const MovieDetail = () => {
   const { category, id } = useParams();
@@ -39,6 +40,7 @@ const MovieDetail = () => {
 
   return (
     <>
+    <Meta title={`${item.title || item.name}`} />
       <div className="banner" style={{ backgroundImage: `url(${bg})` }}></div>
       <div className="movie__content">
         <div className="content__poster">
