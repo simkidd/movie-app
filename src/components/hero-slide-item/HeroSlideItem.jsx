@@ -19,7 +19,7 @@ const HeroSlideItem = ({ item, activeClass, category }) => {
       <div className="slide__content">
         <div className="content__info">
           <h2>{item.title || item.name}</h2>
-          <p>{item.overview.length > 140 ? item.overview.slice(0, 140) + "..." : item.overview}</p>
+          <p>{item.overview.length > 60 ? item.overview.slice(0, 60) + "..." : item.overview}</p>
           <div className="btns">
             <Button
               title="Watch now"
