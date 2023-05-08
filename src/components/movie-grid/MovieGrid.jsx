@@ -47,9 +47,10 @@ const MovieGrid = ({ category }) => {
   };
 
   return (
-    <div className="section">
-      <div className="search__container">//search is here...</div>
-
+    <>
+      <div className="section">
+        <div className="search__container">//search is here...</div>
+      </div>
       <div className="movie__grid">
         {items.map((item, i) => (
           <MovieCard key={i} item={item} category={category} />
@@ -57,9 +58,11 @@ const MovieGrid = ({ category }) => {
       </div>
 
       {page < totalPage ? (
-        <OutlineButton onClick={handleLoadMore} title={"Load More"}  />
+        <div className="load__more">
+          <OutlineButton onClick={handleLoadMore} title={"Load More"} />
+        </div>
       ) : null}
-    </div>
+    </>
   );
 };
 
