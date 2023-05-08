@@ -33,6 +33,10 @@
         z-index: 2;
         max-width: 1000px;
         margin: auto;
+        @media screen and (max-width: 768px) {
+            padding-right: 2rem;
+            padding-left: 2rem;
+        }
 
         .content__info{
             position: relative;
