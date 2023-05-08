@@ -9,7 +9,12 @@ const HeroSlideItem = ({ item, activeClass, category }) => {
   const bg = apiConfig.original_image(item.backdrop_path);
   const navigate = useNavigate();
 
-  const path = category === cat.movie ? "movie" : "tv";
+  const path = {
+    "movie": "/movie",
+    "tv": "/tv"
+  }
+
+  const link = `${path[category]}/${item.id}`
 
   return (
     <div
@@ -23,7 +28,7 @@ const HeroSlideItem = ({ item, activeClass, category }) => {
           <div className="btns">
             <Button
               title="Watch now"
-              onClick={() => navigate(`/${path}/${item.id}`)}
+              onClick={() => navigate(link)}
             />
           </div>
         </div>

@@ -42,6 +42,7 @@ const HeroSlide = () => {
     }
     return array;
   };
+  
 
   return (
     <div className="hero__slide">
