@@ -74,7 +74,7 @@ const MovieDetail = () => {
             </div>
             <div className="movie__rating">
             <FaStar size={24} />
-            {item ? item.vote_average : ""}{" "}
+            {item ? item.vote_average.toFixed(1) : ""}{" "}
             {/* <span className="movie__voteCount">
               {item
                 ? "(" + item.vote_count + ") votes"

@@ -42,7 +42,7 @@ const Home = () => {
         <div className="section">
           <div className="section__header">
             <h2>Trending Movies</h2>
-            <Link to="/">
+            <Link to={`/movie/trending`}>
               <OutlineButton title={"View more"} />
             </Link>
           </div>

@@ -4,8 +4,8 @@ import "./header.scss";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const {pathname} = useLocation();
-  window.scrollTo(0,0)
+  const { pathname } = useLocation();
+  window.scrollTo(0, 0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,14 +28,11 @@ const Header = () => {
         </div>
 
         <ul className="header__menu">
-          <li className={pathname === '/' ? 'active' : ''}>
+          <li className={pathname === "/" ? "active" : ""}>
             <Link to="/">Home</Link>
           </li>
-          <li className={pathname === '/movie' ? 'active' : ''}>
-            <Link to="/movie">Movies</Link>
-          </li>
-          <li className={pathname === '/tv' ? 'active' : ''}>
-            <Link to="/tv">Tv Shows</Link>
+          <li className={pathname === "/explore" ? "active" : ""}>
+            <Link to="explore">Explore</Link>
           </li>
         </ul>
       </div>

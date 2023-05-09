@@ -3,30 +3,32 @@ import "./movie-grid.scss";
 import MovieCard from "../movie-card/MovieCard";
 import tmdbApi, { category as cat, movieType, tvType } from "../../api/tmdbApi";
 import { OutlineButton } from "../buttons/Button";
-import Meta from "../helmet/Meta";
 
 const MovieGrid = ({ category }) => {
   const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const getList = async () => {
+      setIsLoading(true);
       try {
         let res = [];
         if (category === cat.movie) {
-          res = await tmdbApi.getMoviesList(cat.movie, movieType.popular);
+          res = await tmdbApi.getMoviesList(cat.movie, movieType.popular, page);
         } else if (category === cat.tv) {
-          res = await tmdbApi.getTvList(cat.tv, tvType.popular);
+          res = await tmdbApi.getTvList(cat.tv, tvType.popular, page);
         }
         setItems(res.results);
-        setTotalPage(res.total_pages);
+        setTotalPages(res.total_pages);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
     getList();
-  }, [category]);
+  }, [category, page]);
 
   const handleLoadMore = async () => {
     try {
@@ -46,10 +48,24 @@ const MovieGrid = ({ category }) => {
       console.log(error);
     }
   };
+  
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
 
   return (
     <>
-      <Meta title={`${category === cat.movie ? "Movies" : "TV Shows"}`} />
       <div className="section">
         <div className="search__container">//search is here...</div>
       </div>
@@ -58,12 +74,11 @@ const MovieGrid = ({ category }) => {
           <MovieCard key={i} item={item} category={category} />
         ))}
       </div>
-
-      {page < totalPage ? (
+      {page < totalPages ? (
         <div className="load__more">
-          <OutlineButton onClick={handleLoadMore} title={"Load More"} />
+          <OutlineButton onClick={handleLoadMore} title={"Load more"} />
         </div>
-      ) : null}
+      ): null}
     </>
   );
 };
