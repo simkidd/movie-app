@@ -40,8 +40,8 @@ const MovieGrid = ({ category }) => {
       } else if (category === cat.tv) {
         res = await tmdbApi.getTvList(cat.tv, tvType.popular, page + 1);
       }
-      setItems([...items, ...res.results]);
-      setPage(page + 1);
+      setItems((prevItems) => [...prevItems, ...res.results]);
+      setPage((prevPage) => prevPage + 1);
     } catch (error) {
       console.log(error);
     }
@@ -49,7 +49,7 @@ const MovieGrid = ({ category }) => {
 
   return (
     <>
-    <Meta title={`${category === cat.movie ? "Movies" : "TV Shows"}`} />
+      <Meta title={`${category === cat.movie ? "Movies" : "TV Shows"}`} />
       <div className="section">
         <div className="search__container">//search is here...</div>
       </div>

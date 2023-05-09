@@ -16,16 +16,38 @@ const Home = () => {
     popularTvShows,
     topRatedTvShows,
     onTheAirTvShows,
+    trendingMovies,
+    trendingTv,
   } = useContext(MovieContext);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          height: "100vh",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h1>Loading...</h1>
+      </div>
+    );
   }
 
   return (
     <>
       <HeroSlide />
       <div className="home__container">
+        <div className="section">
+          <div className="section__header">
+            <h2>Trending Movies</h2>
+            <Link to="/">
+              <OutlineButton title={"View more"} />
+            </Link>
+          </div>
+          <MovieList type={trendingMovies} category={"movie"} />
+        </div>
         <div className="section">
           <div className="section__header">
             <h2>Upcoming Movies</h2>
@@ -52,6 +74,15 @@ const Home = () => {
             </Link>
           </div>
           <MovieList type={topRatedMovies} category={category.movie} />
+        </div>
+        <div className="section">
+          <div className="section__header">
+            <h2>Trending Tv</h2>
+            <Link to="/movie">
+              <OutlineButton title={"View more"} />
+            </Link>
+          </div>
+          <MovieList type={trendingTv} category={"tv"} />
         </div>
         <div className="section">
           <div className="section__header">

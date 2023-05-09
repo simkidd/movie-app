@@ -7,6 +7,7 @@ import MovieList from "../../components/movie-list/MovieList";
 import CastList from "../../components/cast-list/CastList";
 import VideoList from "../../components/video-list/VideoList";
 import Meta from "../../components/helmet/Meta";
+import {FaRegCalendar, FaStar} from 'react-icons/fa'
 
 const MovieDetail = () => {
   const { category, id } = useParams();
@@ -65,21 +66,21 @@ const MovieDetail = () => {
             <p>{item.overview}</p>
             <div className="release">
               {item.release_date ? (
-                <p>Release Date: {item.release_date}</p>
+                <p><FaRegCalendar size={24}/>{item.release_date}</p>
               ) : (
-                <p>Air Date: {item.first_air_date}</p>
+                <p><FaRegCalendar/> {item.first_air_date}</p>
               )}
               {item.runtime && <p>Runtime: {item.runtime} minutes</p>}
             </div>
-            {/* <div className="movie__rating">
+            <div className="movie__rating">
+            <FaStar size={24} />
             {item ? item.vote_average : ""}{" "}
-            <i class="fas fa-star" />
-            <span className="movie__voteCount">
+            {/* <span className="movie__voteCount">
               {item
                 ? "(" + item.vote_count + ") votes"
                 : ""}
-            </span>
-          </div> */}
+            </span> */}
+          </div>
             <div className="casts">
               <div className="section__header">
                 <h2>Casts</h2>

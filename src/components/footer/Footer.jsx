@@ -34,7 +34,7 @@ const Footer = () => {
       </div>
 
       <div className="footer__bottom">
-        <p>&copy;{new Date().getFullYear()}. All rights reversed. Developer by John Mason</p>
+        <p>&copy; {new Date().getFullYear()}. All rights reversed. Developed by John Mason</p>
       </div>
     </div>
   );

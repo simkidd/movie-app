@@ -62,7 +62,7 @@ const HeroSlide = () => {
                 <HeroSlideItem
                   item={item}
                   activeClass={`${isActive ? "active" : ""} `}
-                  category={category}
+                  category={"movie" || "tv"}
                 />
               )}
             </SwiperSlide>

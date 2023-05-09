@@ -20,21 +20,22 @@ export const tvType = {
   on_the_air: "on_the_air",
 };
 
+
 const tmdbApi = {
   getMoviesList: async (category, type) => {
-    const url = `${base_url}/${category}/${type}?api_key=${api_key}&language=en-US&page=1`;
+    const url = `${base_url}/${category}/${type}?api_key=${api_key}`;
     const response = await axios.get(url);
     return response.data;
   },
   
   getTvList: async (category, type) => {
-    const url = `${base_url}/${category}/${type}?api_key=${api_key}&language=en-US&page=1`;
+    const url = `${base_url}/${category}/${type}?api_key=${api_key}`;
     const response = await axios.get(url);
     return response.data;
   },
 
   getVideos: async (category, id) => {
-    const url = `${base_url}/${category}/${id}/videos?api_key=${api_key}&language=en-US`;
+    const url = `${base_url}/${category}/${id}/videos?api_key=${api_key}`;
     const response = await axios.get(url);
     return response.data.results;
   },
@@ -46,7 +47,7 @@ const tmdbApi = {
   },
 
   detail: async (category, id) => {
-    const url = `${base_url}/${category}/${id}?api_key=${api_key}&language=en-US`;
+    const url = `${base_url}/${category}/${id}?api_key=${api_key}`;
     const response = await axios.get(url);
     return response.data;
   },
@@ -58,9 +59,19 @@ const tmdbApi = {
   },
 
   similar: async (category, id) => {
-    const url = `${base_url}/${category}/${id}/similar?api_key=${api_key}&language=en-US&page=1`;
+    const url = `${base_url}/${category}/${id}/similar?api_key=${api_key}`;
     const response = await axios.get(url);
     return response.data.results;
+  },
+  getTrendingMovies: async()=>{
+    const url = `${base_url}/trending/movie/day?api_key=${api_key}`;
+    const response = await axios.get(url);
+    return response.data;
+  },
+  getTrendingTv: async()=>{
+    const url = `${base_url}/trending/tv/day?api_key=${api_key}`;
+    const response = await axios.get(url);
+    return response.data;
   },
 };
 
