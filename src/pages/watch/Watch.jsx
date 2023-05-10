@@ -48,7 +48,10 @@ const Watch = () => {
 
   return (
     <>
-      <div className="watch__banner" style={{ backgroundImage: `url(${bg})` }}></div>
+      <div
+        className="watch__banner"
+        style={{ backgroundImage: `url(${bg})` }}
+      ></div>
 
       <div className="watch__container">
         <p className="back__to">
@@ -73,7 +76,7 @@ const Watch = () => {
                 ></iframe>
               )}
               <div className="playlist">
-
+                {category === cat.tv && <p>seasons and episodes</p>}
               </div>
             </div>
 
@@ -89,16 +92,19 @@ const Watch = () => {
                 ></div>
               </div>
               <div className="watch__info">
-                <h2>{item.title || item.name} ({new Date(item.release_date).getFullYear() || new Date(item.first_air_date).getFullYear()})</h2>
+                <h2>
+                  {item.title || item.name} (
+                  {new Date(item.release_date).getFullYear() ||
+                    new Date(item.first_air_date).getFullYear()}
+                  )
+                </h2>
                 <p>{item.overview}</p>
-                <p>Duration: {item.runtime} minutes</p>
+                <p><span>Duration:</span> {item.runtime} minutes</p>
                 <p>
-                Genre: {item.genres.map((genre) => genre.name).join(", ")}
+                  <span>Genre:</span> {item.genres.map((genre) => genre.name).join(", ")}
                 </p>
-                <p>
-                Casts: {casts.map((cast) => cast.name).join(", ")}
-                </p>
-                <p>Country: {item.country}</p>
+                <p><span>Casts:</span> {casts.map((cast) => cast.name).join(", ")}</p>
+                {category === cat.tv && <p><span>Country:</span> {item.origin_country}</p>}
               </div>
             </div>
           </div>

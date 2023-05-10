@@ -110,6 +110,13 @@
                         &:nth-of-type(1) {
                             margin-bottom: 1.5rem;
                         }
+                        &:not(:nth-of-type(1)){
+                            color: grey;
+                        }
+
+                        span{
+                            color: #fff;
+                        }
                     }
                 }
             }
