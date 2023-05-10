@@ -1,0 +1,119 @@
+.watch__banner {
+    height: 100vh;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(6px);
+    
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+    
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background-image: linear-gradient(to top, #0f0f0f, rgba(255, 255, 255, 0));
+    }
+}
+
+.watch__container {
+    margin-top: -530px;
+    position: relative;
+    margin-bottom: 5rem;
+    padding: 0 2.5rem;
+    @media screen and (max-width: 768px) {
+        margin-top: -540px;
+        padding: 0 2rem;
+    }
+
+    .back__to {
+        margin-bottom: 1.5rem;
+    }
+
+    .inner__container {
+
+        .watch {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            @media screen and (max-width: 768px) {
+                flex-direction: column;
+            }
+
+            .watch__player {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 2rem;
+
+                iframe {
+                    @media screen and (max-width:768px) {
+                        width: 100%;
+                        height: 250px;
+                    }
+                }
+            }
+
+            .content__info {
+                display: flex;
+                flex-direction: column;
+                padding-left: 80px;
+
+                @media screen and (max-width: 768px) {
+                    padding-left: 0;
+                }
+
+                .info__poster {
+                    width: 36%;
+                    margin-bottom: 1.5rem;
+
+                    @media screen and (max-width: 768px) {
+                        display: none;
+                    }
+
+                    .poster__img {
+                        background-position: center;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        border-radius: 20px;
+                        padding-top: 150%;
+                    }
+                }
+
+                .watch__info {
+                    h2 {
+                        font-size: 30.8px;
+                        line-height: 1;
+                        margin-bottom: 1rem;
+
+                        @media screen and (max-width: 768px) {
+                            font-size: 22.4px;
+                        }
+                    }
+
+                    p {
+                        margin-bottom: 5px;
+                        line-height: 1.5;
+
+                        &:nth-of-type(1) {
+                            margin-bottom: 1.5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

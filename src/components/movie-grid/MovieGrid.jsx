@@ -66,9 +66,6 @@ const MovieGrid = ({ category }) => {
 
   return (
     <>
-      <div className="section">
-        <div className="search__container">//search is here...</div>
-      </div>
       <div className="movie__grid">
         {items.map((item, i) => (
           <MovieCard key={i} item={item} category={category} />

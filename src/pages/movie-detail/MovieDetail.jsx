@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./movie-detail.scss";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import tmdbApi from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
 import MovieList from "../../components/movie-list/MovieList";
 import CastList from "../../components/cast-list/CastList";
 import VideoList from "../../components/video-list/VideoList";
 import Meta from "../../components/helmet/Meta";
-import {FaRegCalendar, FaStar} from 'react-icons/fa'
+import { FaRegCalendar, FaStar } from "react-icons/fa";
 
 const MovieDetail = () => {
   const { category, id } = useParams();
@@ -31,9 +31,16 @@ const MovieDetail = () => {
 
   if (!item) {
     return (
-      <>
+      <div
+        style={{
+          display: "flex",
+          height: "100vh",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <h2>Loading...</h2>
-      </>
+      </div>
     );
   }
 
@@ -41,7 +48,7 @@ const MovieDetail = () => {
 
   return (
     <>
-    <Meta title={`${item.title || item.name}`} />
+      <Meta title={`${item.title || item.name}`} />
       <div className="banner" style={{ backgroundImage: `url(${bg})` }}></div>
       <div className="movie__content">
         <div className="content__poster">
@@ -56,31 +63,48 @@ const MovieDetail = () => {
         </div>
         <div className="content__info">
           <div className="container">
-            <h1>{item.title || item.name}</h1>
+            {/* <h1>{item.title || item.name}</h1> */}
+            <h1>
+              {item.title || item.name} (
+              {new Date(item.release_date).getFullYear() ||
+                new Date(item.first_air_date).getFullYear()}
+              )
+            </h1>
             <div className="genres">
               {item.genres &&
-                item.genres
-                  .slice(0, 5)
-                  .map((genre, i) => <span key={i}>{genre.name}</span>)}
+                item.genres.map((genre) => (
+                  <span key={genre.id}>{genre.name}</span>
+                ))}
             </div>
             <p>{item.overview}</p>
             <div className="release">
               {item.release_date ? (
-                <p><FaRegCalendar size={24}/>{item.release_date}</p>
+                <p>
+                  <FaRegCalendar size={24} />
+                  {new Date(item.release_date).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric",
+                  })}
+                </p>
               ) : (
-                <p><FaRegCalendar/> {item.first_air_date}</p>
+                <p>
+                  <FaRegCalendar /> {item.first_air_date}
+                </p>
               )}
+            </div>
+            <div className="duration">
               {item.runtime && <p>Runtime: {item.runtime} minutes</p>}
             </div>
             <div className="movie__rating">
-            <FaStar size={24} />
-            {item ? item.vote_average.toFixed(1) : ""}{" "}
-            {/* <span className="movie__voteCount">
+              <FaStar size={24} />
+              {item ? item.vote_average.toFixed(1) : ""}{" "}
+              {/* <span className="movie__voteCount">
               {item
                 ? "(" + item.vote_count + ") votes"
                 : ""}
             </span> */}
-          </div>
+            </div>
             <div className="casts">
               <div className="section__header">
                 <h2>Casts</h2>
@@ -89,6 +113,10 @@ const MovieDetail = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="watch__now">
+        <Link to={`/${category}/${item.id}/watch`}>Watch now</Link>
       </div>
 
       <div className="bottom__content">

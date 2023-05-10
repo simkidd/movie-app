@@ -5,11 +5,11 @@ import Button from "../buttons/Button";
 import { useNavigate } from "react-router-dom";
 import { category as cat } from "../../api/tmdbApi";
 
-const HeroSlideItem = ({ item, activeClass}) => {
+const HeroSlideItem = ({ item, activeClass, category}) => {
   const bg = apiConfig.original_image(item.backdrop_path);
   const navigate = useNavigate();
+
   
-  const link = `/${item[cat]}/${item.id}`
 
   return (
     <div
@@ -21,10 +21,18 @@ const HeroSlideItem = ({ item, activeClass}) => {
           <h2>{item.title || item.name}</h2>
           <p>{item.overview.length > 100 ? item.overview.slice(0, 100) + "..." : item.overview}</p>
           <div className="btns">
+          {category === "movie" && (
             <Button
               title="Watch now"
-              onClick={() => navigate(link)}
+              onClick={() => navigate(`/movie/${item.id}`)}
             />
+          )}
+          {category === "tv" && (
+            <Button
+              title="Watch now"
+              onClick={() => navigate(`/tv/${item.id}`)}
+            />
+          )}
           </div>
         </div>
 
