@@ -76,7 +76,6 @@ const MovieGrid = ({ category }) => {
 
   return (
     <>
-    <p>({items.length})</p>
       <div className="movie__grid">
       {/* {!items && <Skeleton className="skeleton__card" />} */}
         {items.map((item) => (
