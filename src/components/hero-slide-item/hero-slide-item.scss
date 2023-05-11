@@ -61,6 +61,12 @@
                 line-height: 1.5;
             }
 
+            .btns{
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
             .btns, h2, p{
                 opacity: 0;
                 transform: translateY(-100px);

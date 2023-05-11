@@ -23,13 +23,19 @@ export const tvType = {
 
 const tmdbApi = {
   getMoviesList: async (category, type) => {
-    const url = `${base_url}/${category}/${type}?api_key=${api_key}`;
+    const url = `${base_url}/${category}/${type}?api_key=${api_key}&language=en-US&page=1`;
     const response = await axios.get(url);
     return response.data;
   },
   
   getTvList: async (category, type) => {
-    const url = `${base_url}/${category}/${type}?api_key=${api_key}`;
+    const url = `${base_url}/${category}/${type}?api_key=${api_key}&language=en-US&page=1`;
+    const response = await axios.get(url);
+    return response.data;
+  },
+
+  discover: async(category, sortBy, page = 1)=>{
+    const url = `${base_url}/discover/${category}?api_key=${api_key}&sort_by=${sortBy}&page=${page}`;
     const response = await axios.get(url);
     return response.data;
   },
@@ -70,6 +76,16 @@ const tmdbApi = {
   },
   getTrendingTv: async()=>{
     const url = `${base_url}/trending/tv/day?api_key=${api_key}`;
+    const response = await axios.get(url);
+    return response.data;
+  },
+  // getTvSeasons: async (id, season) => {
+  //   const url = `${base_url}/tv/${id}/season/${season}?api_key=${api_key}`;
+  //   const response = await axios.get(url);
+  //   return response.data;
+  // },
+  getTvEpisodes: async (id, season, episode) => {
+    const url = `${base_url}/tv/${id}/season/${season}/episode/${episode}?api_key=${api_key}`;
     const response = await axios.get(url);
     return response.data;
   },

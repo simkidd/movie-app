@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./movie-grid.scss";
 import MovieCard from "../movie-card/MovieCard";
-import tmdbApi, { category as cat, movieType, tvType } from "../../api/tmdbApi";
+import tmdbApi, { category as cat } from "../../api/tmdbApi";
 import { OutlineButton } from "../buttons/Button";
+// import Skeleton from "../skeleton/Skeleton";
 
 const MovieGrid = ({ category }) => {
   const [items, setItems] = useState([]);
@@ -16,11 +17,16 @@ const MovieGrid = ({ category }) => {
       try {
         let res = [];
         if (category === cat.movie) {
-          res = await tmdbApi.getMoviesList(cat.movie, movieType.popular, page);
+          res = await tmdbApi.discover(cat.movie, "popularity.desc", page);
         } else if (category === cat.tv) {
-          res = await tmdbApi.getTvList(cat.tv, tvType.popular, page);
+          res = await tmdbApi.discover(cat.tv, "popularity.desc", page);
         }
-        setItems(res.results);
+         // Filter out duplicate items
+        const uniqueItems = removeDuplicates([...items, ...res.results], "id");
+
+        // setItems(res.results);
+        setItems(uniqueItems);
+        // setItems(prevItems => [...prevItems, ...res.results]);
         setTotalPages(res.total_pages);
         setIsLoading(false);
       } catch (error) {
@@ -34,23 +40,27 @@ const MovieGrid = ({ category }) => {
     try {
       let res = [];
       if (category === cat.movie) {
-        res = await tmdbApi.getMoviesList(
-          cat.movie,
-          movieType.popular,
-          page + 1
-        );
+        res = await tmdbApi.discover(cat.movie, "popularity.desc", page + 1);
       } else if (category === cat.tv) {
-        res = await tmdbApi.getTvList(cat.tv, tvType.popular, page + 1);
+        res = await tmdbApi.discover(cat.tv, "popularity.desc", page + 1);
       }
-      setItems((prevItems) => [...prevItems, ...res.results]);
-      setPage((prevPage) => prevPage + 1);
+       // Filter out duplicate items
+      const uniqueItems = removeDuplicates([...items, ...res.results], "id");
+
+      setItems(uniqueItems);
+      // setItems(prevItems => [...prevItems, ...res.results]);
+      setPage(page + 1);
     } catch (error) {
       console.log(error);
     }
   };
-  
 
-  if (isLoading) {
+  // Utility function to remove duplicate items from an array based on a key
+  const removeDuplicates = (arr, key) => {
+    return arr.filter((item, index, self) => self.findIndex(i => i[key] === item[key]) === index);
+  };
+  
+  if (isLoading && page === 1) {
     return (
       <div
         style={{
@@ -66,16 +76,18 @@ const MovieGrid = ({ category }) => {
 
   return (
     <>
+    <p>({items.length})</p>
       <div className="movie__grid">
-        {items.map((item, i) => (
-          <MovieCard key={i} item={item} category={category} />
+      {/* {!items && <Skeleton className="skeleton__card" />} */}
+        {items.map((item) => (
+          <MovieCard key={item.id} item={item} category={category} />
         ))}
       </div>
-      {page < totalPages ? (
+      {page < totalPages && (
         <div className="load__more">
           <OutlineButton onClick={handleLoadMore} title={"Load more"} />
         </div>
-      ): null}
+      )}
     </>
   );
 };

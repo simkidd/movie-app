@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./hero-slide-item.scss";
 import apiConfig from "../../api/apiConfig";
-import Button from "../buttons/Button";
-import { useNavigate } from "react-router-dom";
+import Button, { OutlineButton } from "../buttons/Button";
+import { Link } from "react-router-dom";
 import { category as cat } from "../../api/tmdbApi";
 
-const HeroSlideItem = ({ item, activeClass, category}) => {
+const HeroSlideItem = ({ item, activeClass }) => {
   const bg = apiConfig.original_image(item.backdrop_path);
-  const navigate = useNavigate();
 
-  
+  const type = item === cat.tv ? "tv" : "movie";
 
   return (
     <div
@@ -19,20 +18,15 @@ const HeroSlideItem = ({ item, activeClass, category}) => {
       <div className="slide__content">
         <div className="content__info">
           <h2>{item.title || item.name}</h2>
-          <p>{item.overview.length > 100 ? item.overview.slice(0, 100) + "..." : item.overview}</p>
+          <p>
+            {item.overview.length > 100
+              ? item.overview.slice(0, 100) + "..."
+              : item.overview}
+          </p>
           <div className="btns">
-          {category === "movie" && (
-            <Button
-              title="Watch now"
-              onClick={() => navigate(`/movie/${item.id}`)}
-            />
-          )}
-          {category === "tv" && (
-            <Button
-              title="Watch now"
-              onClick={() => navigate(`/tv/${item.id}`)}
-            />
-          )}
+            <Link to={`/${type}/${item.id}`}>
+              <Button title="Watch now" />
+            </Link>
           </div>
         </div>
 

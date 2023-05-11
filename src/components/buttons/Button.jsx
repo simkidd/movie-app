@@ -2,7 +2,7 @@ import React from "react";
 import "./buttons.scss";
 
 const Button = ({title, className, onClick}) => {
-  return <button className={`btn ${className}`} onClick={onClick}>{title}</button>;
+  return <button className={`btn ${className} small` } onClick={onClick}>{title}</button>;
 };
 
 export const OutlineButton = ({title, onClick, className}) => {

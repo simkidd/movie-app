@@ -42,7 +42,7 @@ const Home = () => {
         <div className="section">
           <div className="section__header">
             <h2>Trending Movies</h2>
-            <Link to={`/movie/trending`}>
+            <Link to={`/explore#movie`}>
               <OutlineButton title={"View more"} />
             </Link>
           </div>
@@ -51,7 +51,7 @@ const Home = () => {
         <div className="section">
           <div className="section__header">
             <h2>Upcoming Movies</h2>
-            <Link to="/movie">
+            <Link to={`/explore#movie`}>
               <OutlineButton title={"View more"} />
             </Link>
           </div>
@@ -60,7 +60,7 @@ const Home = () => {
         <div className="section">
           <div className="section__header">
             <h2>Popular Movies</h2>
-            <Link to="/movie">
+            <Link to={`/explore#movie`}>
               <OutlineButton title={"View more"} />
             </Link>
           </div>
@@ -69,7 +69,7 @@ const Home = () => {
         <div className="section">
           <div className="section__header">
             <h2>Top Rated Movies</h2>
-            <Link to="/movie">
+            <Link to={`/explore#movie`}>
               <OutlineButton title={"View more"} />
             </Link>
           </div>
@@ -78,7 +78,7 @@ const Home = () => {
         <div className="section">
           <div className="section__header">
             <h2>Trending Tv</h2>
-            <Link to="/movie">
+            <Link to={`/explore#tv`}>
               <OutlineButton title={"View more"} />
             </Link>
           </div>
@@ -87,7 +87,7 @@ const Home = () => {
         <div className="section">
           <div className="section__header">
             <h2>On the Air TV Shows</h2>
-            <Link to="/tv">
+            <Link to={`/explore#tv`}>
               <OutlineButton title={"View more"} />
             </Link>
           </div>
@@ -96,7 +96,7 @@ const Home = () => {
         <div className="section">
           <div className="section__header">
             <h2>Popular TV</h2>
-            <Link to="/tv">
+            <Link to={`/explore#tv`}>
               <OutlineButton title={"View more"} />
             </Link>
           </div>
@@ -105,7 +105,7 @@ const Home = () => {
         <div className="section">
           <div className="section__header">
             <h2>Top Rated TV</h2>
-            <Link to="/tv">
+            <Link to={`/explore#tv`}>
               <OutlineButton title={"View more"} />
             </Link>
           </div>

@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import './skeleton.scss'
 
-const Skeleton = () => {
+const Skeleton = ({className}) => {
   return (
-    <div>Skeleton</div>
+    <div className={`animate-pulse ${className}`}>
+      <p>Skeleton loading...</p>
+    </div>
   )
 }
 
