@@ -6,6 +6,7 @@ import MovieList from "../../components/movie-list/MovieList";
 import "./home.scss";
 import { OutlineButton } from "../../components/buttons/Button";
 import { category } from "../../api/tmdbApi";
+import {ClipLoader} from 'react-spinners'
 
 const Home = () => {
   const {
@@ -28,8 +29,10 @@ const Home = () => {
           height: "100vh",
           alignItems: "center",
           justifyContent: "center",
+          flexDirection:'column'
         }}
       >
+      <ClipLoader size={80} color={"#ff0000"} loading={isLoading} />
         <h1>Loading...</h1>
       </div>
     );

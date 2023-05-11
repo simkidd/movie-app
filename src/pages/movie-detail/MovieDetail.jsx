@@ -8,16 +8,19 @@ import CastList from "../../components/cast-list/CastList";
 import VideoList from "../../components/video-list/VideoList";
 import Meta from "../../components/helmet/Meta";
 import { FaRegCalendar, FaStar } from "react-icons/fa";
+import {ClipLoader} from 'react-spinners'
 
 const MovieDetail = () => {
   const { category, id } = useParams();
   const [item, setItem] = useState(null);
   const [similarMovies, setSimilarMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     const getDetail = async () => {
       const res = await tmdbApi.detail(category, id);
       setItem(res);
+      setIsLoading(false)
       window.scrollTo(0, 0);
     };
 
@@ -29,7 +32,7 @@ const MovieDetail = () => {
     getSimilarMovies();
   }, [category, id]);
 
-  if (!item) {
+  if (isLoading) {
     return (
       <div
         style={{
@@ -37,8 +40,10 @@ const MovieDetail = () => {
           height: "100vh",
           alignItems: "center",
           justifyContent: "center",
+          flexDirection:'column'
         }}
       >
+      <ClipLoader size={80} color={"#ff0000"} loading={isLoading} />
         <h2>Loading...</h2>
       </div>
     );
