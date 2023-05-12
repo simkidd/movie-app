@@ -43,10 +43,24 @@ const CastsWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
   gap: 10px;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    overflow-x: auto;
+    /* Hide the scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+
+    /* Hide scrollbar on WebKit browsers */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+  }
 
   .casts__item{
       .casts__img{
         padding-top: 130px;
+        width: 100px;
         background-size: cover;
         margin-bottom: 0.5rem;
     }

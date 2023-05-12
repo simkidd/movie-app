@@ -4,6 +4,7 @@ import tmdbApi from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
 import "./watch.scss";
 import { category as cat } from "../../api/tmdbApi";
+import {ClipLoader} from 'react-spinners'
 
 const Watch = () => {
   const { category, id } = useParams();
@@ -12,11 +13,13 @@ const Watch = () => {
   const [seasons, setSeasons] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState("");
   const [selectedEpisode, setSelectedEpisode] = useState("");
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     const getDetail = async () => {
       const res = await tmdbApi.detail(category, id);
       setItem(res);
+      setIsLoading(false)
       window.scrollTo(0, 0);
     };
     const getCredits = async () => {
@@ -52,7 +55,7 @@ const Watch = () => {
     setSelectedEpisode(e.target.value);
   };
 
-  if (!item) {
+  if (isLoading) {
     return (
       <div
         style={{
@@ -62,6 +65,7 @@ const Watch = () => {
           justifyContent: "center",
         }}
       >
+      <ClipLoader size={80} color={"#ff0000"} loading={isLoading} />
         <h2>Loading...</h2>
       </div>
     );
