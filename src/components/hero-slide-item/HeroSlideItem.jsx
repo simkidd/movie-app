@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./hero-slide-item.scss";
 import apiConfig from "../../api/apiConfig";
 import Button, { OutlineButton } from "../buttons/Button";
 import { Link } from "react-router-dom";
 import { category as cat } from "../../api/tmdbApi";
 
-const HeroSlideItem = ({ item, activeClass }) => {
+const HeroSlideItem = ({ item, activeClass, type }) => {
   const bg = apiConfig.original_image(item.backdrop_path);
-
-  const type = item.media_type === cat.tv ? "tv" : "movie";
+  
 
   return (
     <div

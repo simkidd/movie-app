@@ -5,7 +5,6 @@ import './movie-card.scss'
 import { category as cat } from '../../api/tmdbApi';
 import {BsPlayFill} from 'react-icons/bs'
 import Button from '../buttons/Button';
-import {BounceLoader} from 'react-spinners'
 import { CardSkeleton } from '../skeleton/Skeleton';
 
 const MovieCard = ({item, category}) => {
@@ -14,7 +13,7 @@ const MovieCard = ({item, category}) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timer); // Clear the timer on component unmount
   }, []);

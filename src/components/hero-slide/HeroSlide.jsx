@@ -20,7 +20,7 @@ const HeroSlide = () => {
       );
       const tvList = await tmdbApi.getTvList(category.tv, tvType.popular);
       const items = [...movieList.results, ...tvList.results];
-
+      console.log(movieList);
       setMovieItems(items);
     };
     getMovies();
@@ -42,7 +42,6 @@ const HeroSlide = () => {
     }
     return array;
   };
-  
 
   return (
     <div className="hero__slide">
@@ -58,13 +57,18 @@ const HeroSlide = () => {
         {randomOrder.map((item, i) => {
           return (
             <SwiperSlide key={i}>
-              {({ isActive }) => (
-                <HeroSlideItem
-                  item={item}
-                  activeClass={`${isActive ? "active" : ""}`}
-                  // category={}
-                />
-              )}
+              {({ isActive }) => {
+                const isMovie = item.title !== undefined;
+                const type = isMovie ? "movie" : "tv";
+
+                return (
+                  <HeroSlideItem
+                    item={item}
+                    activeClass={`${isActive ? "active" : ""}`}
+                    type={type}
+                  />
+                );
+              }}
             </SwiperSlide>
           );
         })}
