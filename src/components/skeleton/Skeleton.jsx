@@ -1,12 +1,16 @@
-import React from 'react';
-import './skeleton.scss'
+import React from "react";
+import "./skeleton.scss";
 
-const Skeleton = ({className}) => {
+export const CardSkeleton = () => {
+  return <div className="movie__card skeleton"></div>;
+};
+
+const Skeleton = () => {
   return (
-    <div className={`animate-pulse ${className}`}>
+    <div className="">
       <p>Skeleton loading...</p>
     </div>
-  )
-}
+  );
+};
 
-export default Skeleton
+export default Skeleton;
