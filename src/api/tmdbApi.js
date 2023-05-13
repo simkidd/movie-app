@@ -20,6 +20,11 @@ export const tvType = {
   on_the_air: "on_the_air",
 };
 
+export const timeWindow = {
+  day: "day",
+  week: "week",
+};
+
 
 const tmdbApi = {
   getMoviesList: async (category, type) => {
@@ -47,7 +52,8 @@ const tmdbApi = {
   },
 
   search: async (query) => {
-    const url = `${base_url}/search/multi?api_key=${api_key}&language=en-US&query=${query}&page=1&include_adult=false`;
+    const url = `${base_url}/search/multi?api_key=${api_key}&query=${query}`;
+    
     const response = await axios.get(url);
     return response.data.results;
   },
@@ -69,13 +75,8 @@ const tmdbApi = {
     const response = await axios.get(url);
     return response.data.results;
   },
-  getTrendingMovies: async()=>{
-    const url = `${base_url}/trending/movie/day?api_key=${api_key}`;
-    const response = await axios.get(url);
-    return response.data;
-  },
-  getTrendingTv: async()=>{
-    const url = `${base_url}/trending/tv/day?api_key=${api_key}`;
+  getTrending: async (category, timeWindow) => {
+    const url = `${base_url}/trending/${category}/${timeWindow}?api_key=${api_key}`;
     const response = await axios.get(url);
     return response.data;
   },

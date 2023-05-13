@@ -9,6 +9,17 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 2rem;
+
+            .time__window{
+                button{
+                    background: #fff;
+                    color: black;
+                    &.active{
+                        background: #ff0000;
+                        color: #fff;
+                    }
+                }
+            }
         }
     }
 }

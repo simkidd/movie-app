@@ -29,7 +29,7 @@ const CastList = ({ id }) => {
                 )})`,
               }}
             ></div>
-            <p className="casts__name">{item.name} as <em style={{color: 'gray'}}>{item.character}</em></p>
+            <p className="casts__name">{item.name} <br></br> <em style={{color: 'gray'}}>{item.character}</em></p>
           </div>
         );
       })}
@@ -58,15 +58,17 @@ const CastsWrapper = styled.div`
   }
 
   .casts__item{
-      .casts__img{
-        padding-top: 130px;
+    width: 100px;
+    .casts__img{
         width: 100px;
+        padding-top: 130px;
         background-size: cover;
         margin-bottom: 0.5rem;
     }
 
     .casts__name{
         font-size: 0.8rem;
+        margin-bottom: 0;
     }
   }
 `;

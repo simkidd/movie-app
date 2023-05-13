@@ -6,7 +6,7 @@ import MovieList from "../../components/movie-list/MovieList";
 import "./home.scss";
 import { OutlineButton } from "../../components/buttons/Button";
 import { category } from "../../api/tmdbApi";
-import {ClipLoader} from 'react-spinners'
+import { ClipLoader } from "react-spinners";
 
 const Home = () => {
   const {
@@ -17,10 +17,9 @@ const Home = () => {
     popularTvShows,
     topRatedTvShows,
     onTheAirTvShows,
-    trendingMovies,
-    trendingTv,
   } = useContext(MovieContext);
 
+  
   if (isLoading) {
     return (
       <div
@@ -29,10 +28,10 @@ const Home = () => {
           height: "100vh",
           alignItems: "center",
           justifyContent: "center",
-          flexDirection:'column'
+          flexDirection: "column",
         }}
       >
-      <ClipLoader size={80} color={"#ff0000"} loading={isLoading} />
+        <ClipLoader size={80} color={"#ff0000"} loading={isLoading} />
         <h1>Loading...</h1>
       </div>
     );
@@ -45,11 +44,12 @@ const Home = () => {
         <div className="section">
           <div className="section__header">
             <h2>Trending Movies</h2>
+            <div className="time__window"></div>
             <Link to={`/explore#movie`}>
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          <MovieList type={trendingMovies} category={"movie"} />
+          {/* <MovieList type={trendingMovies} category={"movie"} /> */}
         </div>
         <div className="section">
           <div className="section__header">
@@ -81,11 +81,12 @@ const Home = () => {
         <div className="section">
           <div className="section__header">
             <h2>Trending Tv</h2>
+            <div className="time__window"></div>
             <Link to={`/explore#tv`}>
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          <MovieList type={trendingTv} category={"tv"} />
+          {/* <MovieList type={trendingTv} category={"tv"} /> */}
         </div>
         <div className="section">
           <div className="section__header">

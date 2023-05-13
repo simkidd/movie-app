@@ -8,7 +8,7 @@ import { category as cat } from "../../api/tmdbApi";
 const HeroSlideItem = ({ item, activeClass }) => {
   const bg = apiConfig.original_image(item.backdrop_path);
 
-  const type = item === cat.tv ? "tv" : "movie";
+  const type = item.media_type === cat.tv ? "tv" : "movie";
 
   return (
     <div
