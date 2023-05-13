@@ -17,6 +17,8 @@ const Home = () => {
     popularTvShows,
     topRatedTvShows,
     onTheAirTvShows,
+    trendingMovies,
+    trendingTvShows
   } = useContext(MovieContext);
 
   
@@ -49,7 +51,7 @@ const Home = () => {
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          {/* <MovieList type={trendingMovies} category={"movie"} /> */}
+          <MovieList type={trendingMovies} category={"movie"} />
         </div>
         <div className="section">
           <div className="section__header">
@@ -86,7 +88,7 @@ const Home = () => {
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          {/* <MovieList type={trendingTv} category={"tv"} /> */}
+          <MovieList type={trendingTvShows} category={"tv"} />
         </div>
         <div className="section">
           <div className="section__header">

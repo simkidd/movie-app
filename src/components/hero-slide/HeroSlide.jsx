@@ -54,9 +54,9 @@ const HeroSlide = () => {
           disableOnInteraction: false,
         }}
       >
-        {randomOrder.map((item, i) => {
+        {randomOrder.map((item) => {
           return (
-            <SwiperSlide key={i}>
+            <SwiperSlide key={item.id}>
               {({ isActive }) => {
                 const isMovie = item.title !== undefined;
                 const type = isMovie ? "movie" : "tv";
