@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import Button from "../buttons/Button";
 import { MovieContext } from "../../contexts/MovieContext";
 import { useNavigate } from "react-router-dom";
+import './search.scss';
+import {BsSearch} from 'react-icons/bs'
 
 const Search = () => {
     const {handleSearch} = useContext(MovieContext)
@@ -30,7 +32,7 @@ const Search = () => {
           value={searchQuery}
           onChange={handleInputChange}
         />
-        <Button type="submit" title={"Search"} />
+        <Button type="submit" title={<BsSearch/>} />
       </form>
     </div>
   );

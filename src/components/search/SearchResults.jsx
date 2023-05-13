@@ -5,9 +5,6 @@ import Search from "./Search";
 
 const SearchResults = ({ results, query }) => {
   const [activeTab, setActiveTab] = useState("movie");
-  
-
-  console.log(results);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -23,25 +20,26 @@ const SearchResults = ({ results, query }) => {
       <div className="catalog__header">
         <h2>Search Results for "{query}"</h2>
       </div>
-      <div className="section">
-        <div className="search__container">
-          <Search />
-        </div>
-        <div className="search__tabs">
+      <div className="section flex">
+        <div className="tab__buttons">
           <button
-            className={activeTab === "movie" ? "active" : ""}
+            className={`tab__button ${activeTab === "movie" ? "active" : ""}`}
             onClick={() => handleTabChange("movie")}
           >
             Movies
           </button>
           <button
-            className={activeTab === "tv" ? "active" : ""}
+            className={`tab__button ${activeTab === "tv" ? "active" : ""}`}
             onClick={() => handleTabChange("tv")}
           >
             TV Shows
           </button>
         </div>
-
+        <div className="search__container">
+          <Search />
+        </div>
+      </div>
+      <div className="section">
         {filteredResults.length === 0 ? (
           <div className="search__results">
             <p>No results found</p>
@@ -54,7 +52,6 @@ const SearchResults = ({ results, query }) => {
           </div>
         )}
       </div>
-      
     </>
   );
 };
