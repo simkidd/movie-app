@@ -2,18 +2,23 @@
     width: 100%;
     max-width: 500px;
     position: relative;
+    display: flex;
+    align-items: center;
 
     input{
         width: 100%;
-        padding-right: 8rem;
+        padding-right: 8rem !important;
         background: #000;
         color: #fff;
         border: none;
+        padding: 0.5rem 1.8rem;
+        border-radius: 20px;
     }
     button{
         position: absolute;
         right: 0;
-        top: 2px;
+        top: 50%;
+        transform: translate(0, -50%);
     }
 }
 
