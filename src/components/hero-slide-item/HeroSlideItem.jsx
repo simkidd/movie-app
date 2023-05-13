@@ -8,6 +8,7 @@ import { category as cat } from "../../api/tmdbApi";
 const HeroSlideItem = ({ item, activeClass, type }) => {
   const bg = apiConfig.original_image(item.backdrop_path);
   
+  const slug = (item?.title || item?.name).toLowerCase().replace(/\s+/g, '-')
 
   return (
     <div
@@ -23,7 +24,7 @@ const HeroSlideItem = ({ item, activeClass, type }) => {
               : item.overview}
           </p>
           <div className="btns">
-            <Link to={`/${type}/${item.id}`}>
+            <Link to={`/${type}/${item.id}-${slug}`}>
               <Button title="Watch now" />
             </Link>
           </div>

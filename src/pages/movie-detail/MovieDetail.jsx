@@ -48,6 +48,7 @@ const MovieDetail = () => {
       </div>
     );
   }
+  const slug = (item?.title || item?.name).toLowerCase().replace(/\s+/g, '-')
 
   const bg = apiConfig.original_image(item.backdrop_path);
 
@@ -121,7 +122,7 @@ const MovieDetail = () => {
       </div>
 
       <div className="watch__now">
-        <Link to={`/${category}/${item.id}/watch`}>Watch now</Link>
+        <Link to={`/${category}/${item.id}-${slug}/watch`}>Watch now</Link>
       </div>
 
       <div className="bottom__content">

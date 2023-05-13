@@ -20,7 +20,9 @@ const MovieCard = ({item, category}) => {
 
   const bg = item?.poster_path ? apiConfig.w500_image(item?.poster_path) : `https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg`
 
-  const link = `/${cat[category]}/${item?.id}`
+  const slug = (item?.title || item?.name).toLowerCase().replace(/\s+/g, '-') // Assuming slug is the title or name of the item
+  
+  const link = `/${cat[category]}/${item?.id}-${slug}`
 
   if (isLoading) {
     return <CardSkeleton />; // Render skeleton loading state
