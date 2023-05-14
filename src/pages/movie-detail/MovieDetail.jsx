@@ -96,7 +96,7 @@ const MovieDetail = () => {
 
             <div className="row">
               <div className="movie__rating">
-                <FaStar size={24} />
+                <FaStar size={20} />
                 {item ? item.vote_average.toFixed(1) : ""}{" "}
                 {/* <span className="movie__voteCount">
                   {item ? "(" + item.vote_count + ") votes" : ""}
@@ -117,7 +117,7 @@ const MovieDetail = () => {
             <div className="release">
               {item.release_date ? (
                 <p>
-                  <FaRegCalendar size={24} />
+                  <FaRegCalendar size={20} />
                   {new Date(item.release_date).toLocaleDateString("en-US", {
                     month: "short",
                     day: "2-digit",
@@ -126,7 +126,7 @@ const MovieDetail = () => {
                 </p>
               ) : (
                 <p>
-                  <FaRegCalendar /> {item.first_air_date}
+                  <FaRegCalendar size={20} /> {item.first_air_date}
                 </p>
               )}
             </div>

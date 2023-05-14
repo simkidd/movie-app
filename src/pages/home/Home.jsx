@@ -16,7 +16,7 @@ const Home = () => {
     topRatedMovies,
     popularTvShows,
     topRatedTvShows,
-    onTheAirTvShows,
+    airingTodayTvShows,
     trendingMovies,
     trendingTvShows
   } = useContext(MovieContext);
@@ -92,12 +92,12 @@ const Home = () => {
         </div>
         <div className="section">
           <div className="section__header">
-            <h2>On the Air TV Shows</h2>
+            <h2>Airing Today</h2>
             <Link to={`/explore#tv`}>
               <OutlineButton title={"View more"} />
             </Link>
           </div>
-          <MovieList type={onTheAirTvShows} category={category.tv} />
+          <MovieList type={airingTodayTvShows} category={category.tv} />
         </div>
         <div className="section">
           <div className="section__header">

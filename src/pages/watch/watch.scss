@@ -39,6 +39,11 @@
 
     .back__to {
         margin-bottom: 1.5rem;
+        a{
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
     }
 
     .inner__container {

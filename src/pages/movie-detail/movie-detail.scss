@@ -130,6 +130,14 @@
                 margin-bottom: 0.5rem;
             }
         }
+
+        .release{
+            >p{
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+        }
     }
 }
 

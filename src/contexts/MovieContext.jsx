@@ -14,7 +14,7 @@ const MovieProvider = ({ children }) => {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [popularTvShows, setPopularTvShows] = useState([]);
   const [topRatedTvShows, setTopRatedTvShows] = useState([]);
-  const [onTheAirTvShows, setOnTheAirTvShows] = useState([]);
+  const [airingTodayTvShows, setAiringTodayTvShows] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [trendingTvShows, setTrendingTvShows] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -45,9 +45,9 @@ const MovieProvider = ({ children }) => {
           category.tv,
           tvType.top_rated
         );
-        const onTheAirTvShowsData = await tmdbApi.getTvList(
+        const airingTodayTvShowsData = await tmdbApi.getTvList(
           category.tv,
-          tvType.on_the_air
+          tvType.airing_today
         );
         const trendingMoviesData = await tmdbApi.getTrending(
           category.movie,
@@ -63,7 +63,7 @@ const MovieProvider = ({ children }) => {
         setTopRatedMovies(topRatedMoviesData.results);
         setPopularTvShows(popularTvShowsData.results);
         setTopRatedTvShows(topRatedTvShowsData.results);
-        setOnTheAirTvShows(onTheAirTvShowsData.results);
+        setAiringTodayTvShows(airingTodayTvShowsData.results);
         setTrendingMovies(trendingMoviesData.results);
         setTrendingTvShows(trendingTvShowsData.results);
         setIsLoading(false);
@@ -95,7 +95,7 @@ const MovieProvider = ({ children }) => {
         topRatedMovies,
         popularTvShows,
         topRatedTvShows,
-        onTheAirTvShows,
+        airingTodayTvShows,
         searchQuery,
         searchResults,
         handleSearch,

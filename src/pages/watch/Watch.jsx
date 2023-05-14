@@ -83,7 +83,7 @@ const Watch = () => {
         <p className="back__to">
           <Link to={`/${category}/${item.id}`}>
           <BsChevronLeft />
-            Back to {`${category}`} info
+            Go Back
           </Link>
         </p>
         <div className="inner__container">
