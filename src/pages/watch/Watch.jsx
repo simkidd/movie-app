@@ -112,7 +112,7 @@ const Watch = () => {
                   style={{
                     width: "760px",
                     height: "435px",
-                    background: "#111",
+                    background: "#222",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
