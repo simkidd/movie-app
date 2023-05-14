@@ -81,11 +81,11 @@ const tmdbApi = {
     const response = await axios.get(url);
     return response.data;
   },
-  // getTvSeasons: async (id, season) => {
-  //   const url = `${base_url}/tv/${id}/season/${season}?api_key=${api_key}`;
-  //   const response = await axios.get(url);
-  //   return response.data;
-  // },
+  getTvSeasons: async (id, season) => {
+    const url = `${base_url}/tv/${id}/season/${season}?api_key=${api_key}`;
+    const response = await axios.get(url);
+    return response.data;
+  },
   getTvEpisodes: async (id, season, episode) => {
     const url = `${base_url}/tv/${id}/season/${season}/episode/${episode}?api_key=${api_key}`;
     const response = await axios.get(url);

@@ -4,57 +4,64 @@ import tmdbApi from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
 import "./watch.scss";
 import { category as cat } from "../../api/tmdbApi";
-import {ClipLoader} from 'react-spinners'
+import { ClipLoader } from "react-spinners";
 import { BsChevronLeft } from "react-icons/bs";
 
 const Watch = () => {
   const { category, id } = useParams();
   const [item, setItem] = useState("");
   const [casts, setcasts] = useState([]);
-  const [seasons, setSeasons] = useState([]);
-  const [selectedSeason, setSelectedSeason] = useState("");
-  const [selectedEpisode, setSelectedEpisode] = useState("");
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
+  // season and episode
+  const [season, setSeason] = useState(1);
+  const [episode, setEpisode] = useState(1);
+  const [episodeData, setEpisodeData] = useState(null);
 
   useEffect(() => {
     const getDetail = async () => {
       const res = await tmdbApi.detail(category, id);
       setItem(res);
-      setIsLoading(false)
+      setIsLoading(false);
       window.scrollTo(0, 0);
     };
     const getCredits = async () => {
       const res = await tmdbApi.credits(category, id);
       setcasts(res.slice(0, 6));
     };
-    const getSeasons = async () => {
-      const res = await tmdbApi.getTvSeasons(id, selectedSeason);
-      console.log(res);
-      setSeasons(res);
-      setSelectedSeason(res[0]?.season_number);
-    };
+
     getDetail();
     getCredits();
-    if (category === cat.tv) {
-      getSeasons();
-    }
-  }, [category, id, selectedSeason]);
+  }, [category, id]);
+
+  useEffect(() => {
+    const getEpisodeData = async () => {
+      const res = await tmdbApi.getTvSeasons(id, season); // Fetch the TV season data
+      const episodeList = res.episodes; // Extract the list of episodes from the response
+      setEpisodeData(episodeList);
+      console.log(res);
+      // setIsEpisodeLoading(false);
+    };
+
+    getEpisodeData();
+  }, [id, season]);
+
+  const handleSeasonChange = (e) => {
+    const selectedSeason = parseInt(e.target.value, 10);
+    setSeason(selectedSeason);
+    setEpisode(1);
+  };
+
+  const handleEpisodeChange = (e) => {
+    const selectedEpisode = parseInt(e.target.value, 10);
+    setEpisode(selectedEpisode);
+  };
 
   const { embed_to } = apiConfig;
 
   const embedMovie = `${embed_to}/movie?id=${id}`;
-  const embedTV = `${embed_to}/tv?id=${id}&s=${selectedSeason}&e=${selectedEpisode}`;
+  const embedTV = `${embed_to}/tv?id=${id}&s=${season}&e=${episode}`;
 
   const bg = apiConfig.original_image(item.backdrop_path);
-
-  const handleSeasonChange = (e) => {
-    setSelectedSeason(e.target.value);
-    setSelectedEpisode("");
-  };
-
-  const handleEpisodeChange = (e) => {
-    setSelectedEpisode(e.target.value);
-  };
 
   if (isLoading) {
     return (
@@ -66,7 +73,7 @@ const Watch = () => {
           justifyContent: "center",
         }}
       >
-      <ClipLoader size={80} color={"#ff0000"} loading={isLoading} />
+        <ClipLoader size={80} color={"#ff0000"} loading={isLoading} />
         <h2>Loading...</h2>
       </div>
     );
@@ -82,7 +89,7 @@ const Watch = () => {
       <div className="watch__container">
         <p className="back__to">
           <Link to={`/${category}/${item.id}`}>
-          <BsChevronLeft />
+            <BsChevronLeft />
             Go Back
           </Link>
         </p>
@@ -102,51 +109,35 @@ const Watch = () => {
                   allowFullScreen
                 ></iframe>
               )}
-              <div className="playlist">
-                {category === cat.tv && (
-                  <div>
-                    <select
-                      name="season"
-                      id="season"
-                      onChange={handleSeasonChange}
-                      value={selectedSeason}
-                    >
-                      {seasons.map((season) => (
+              {/* <div className="playlist"></div> */}
+
+              {category === cat.tv && (
+                <div className="playlist">
+                  <select value={season} onChange={handleSeasonChange}>
+                    {item &&
+                      item.seasons.map((season) => (
                         <option
-                          key={season.id}
-                          value={season.season_number.toString()}
+                          key={season.season_number}
+                          value={season.season_number}
                         >
                           Season {season.season_number}
                         </option>
                       ))}
+                  </select>
+                  {episodeData && episodeData.length > 0 && (
+                    <select value={episode} onChange={handleEpisodeChange}>
+                      {episodeData.map((episode) => (
+                        <option
+                          key={episode.episode_number}
+                          value={episode.episode_number}
+                        >
+                          Episode {episode.episode_number}
+                        </option>
+                      ))}
                     </select>
-                    <div>
-                      <select
-                        name="episode"
-                        id="episode"
-                        onChange={handleEpisodeChange}
-                        value={selectedEpisode}
-                      >
-                        {selectedSeason &&
-                          seasons
-                            .find(
-                              (season) =>
-                                season.season_number === selectedSeason
-                            )
-                            .episodes.map((episode) => (
-                              <option
-                                key={episode.id}
-                                value={episode.episode_number.toString()}
-                              >
-                                Episode {episode.episode_number}
-                              </option>
-                            ))}
-                      </select>
-                    </div>
-                    <button disabled={!selectedEpisode}>Play</button>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="content__info">

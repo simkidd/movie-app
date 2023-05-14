@@ -9,7 +9,6 @@ import VideoList from "../../components/video-list/VideoList";
 import Meta from "../../components/helmet/Meta";
 import { FaPlay, FaRegCalendar, FaStar } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
-import { animateScroll as scroll } from "react-scroll";
 
 const MovieDetail = () => {
   const { category, id } = useParams();
@@ -97,10 +96,7 @@ const MovieDetail = () => {
             <div className="row">
               <div className="movie__rating">
                 <FaStar size={20} />
-                {item ? item.vote_average.toFixed(1) : ""}{" "}
-                {/* <span className="movie__voteCount">
-                  {item ? "(" + item.vote_count + ") votes" : ""}
-                </span> */}
+                {item ? (item.vote_average).toFixed(1) : ""}
               </div>
               <div className="watch__now">
                 <Link to={`/${category}/${item.id}-${slug}/watch`}>
@@ -126,7 +122,12 @@ const MovieDetail = () => {
                 </p>
               ) : (
                 <p>
-                  <FaRegCalendar size={20} /> {item.first_air_date}
+                  <FaRegCalendar size={20} />
+                  {new Date(item.first_air_date).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric",
+                  })}
                 </p>
               )}
             </div>
