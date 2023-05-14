@@ -37,6 +37,7 @@
     position: relative;
     padding: 0 2rem;
     margin-bottom: 5rem;
+
     @media screen and (max-width: 768px) {
         margin-top: -450px;
     }
@@ -62,11 +63,13 @@
         width: 70%;
         padding-left: 2rem;
         position: relative;
+
         @media screen and (max-width: 768px) {
             width: 100%;
             padding-left: 0;
         }
-        .container{
+
+        .container {
             box-sizing: border-box;
         }
 
@@ -74,6 +77,10 @@
             font-size: 3rem;
             line-height: 1;
             margin-bottom: 2rem;
+
+            .release__year {
+                font-weight: 400;
+            }
         }
 
         .genres {
@@ -93,19 +100,56 @@
             }
         }
 
+        .row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 2rem;
+
+            .movie__rating {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .watch__now {
+                a {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    width: fit-content;
+                }
+            }
+        }
+
         p {
             margin-bottom: 2rem;
             line-height: 1.5;
+
+            &.tagline {
+                margin-bottom: 0.5rem;
+            }
         }
     }
 }
 
 .bottom__content {
+
     // max-width: 1260px;
     // margin-left: auto;
     // margin-right: auto;
+    .mx-w760 {
+        max-width: 760px;
+        width: 100%;
+        margin: auto;
+        margin-bottom: 1rem;
 
-    .trailer__section{
+        @media screen and (max-width:768px) {
+            padding-left: 2rem;
+        }
+    }
+
+    .trailer__section {
         display: flex;
         align-items: center;
         justify-content: center;

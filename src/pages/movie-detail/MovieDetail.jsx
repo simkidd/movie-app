@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./movie-detail.scss";
 import { Link, useParams } from "react-router-dom";
 import tmdbApi from "../../api/tmdbApi";
@@ -7,20 +7,23 @@ import MovieList from "../../components/movie-list/MovieList";
 import CastList from "../../components/cast-list/CastList";
 import VideoList from "../../components/video-list/VideoList";
 import Meta from "../../components/helmet/Meta";
-import { FaRegCalendar, FaStar } from "react-icons/fa";
-import {ClipLoader} from 'react-spinners'
+import { FaPlay, FaRegCalendar, FaStar } from "react-icons/fa";
+import { ClipLoader } from "react-spinners";
+import { animateScroll as scroll } from "react-scroll";
 
 const MovieDetail = () => {
   const { category, id } = useParams();
   const [item, setItem] = useState(null);
   const [similarMovies, setSimilarMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
+  const trailerSectionRef = useRef(null);
 
   useEffect(() => {
     const getDetail = async () => {
       const res = await tmdbApi.detail(category, id);
       setItem(res);
-      setIsLoading(false)
+      console.log(res);
+      setIsLoading(false);
       window.scrollTo(0, 0);
     };
 
@@ -32,6 +35,12 @@ const MovieDetail = () => {
     getSimilarMovies();
   }, [category, id]);
 
+  const scrollToTrailer = () => {
+    if (trailerSectionRef.current) {
+      trailerSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   if (isLoading) {
     return (
       <div
@@ -40,15 +49,15 @@ const MovieDetail = () => {
           height: "100vh",
           alignItems: "center",
           justifyContent: "center",
-          flexDirection:'column'
+          flexDirection: "column",
         }}
       >
-      <ClipLoader size={80} color={"#ff0000"} loading={isLoading} />
+        <ClipLoader size={80} color={"#ff0000"} loading={isLoading} />
         <h2>Loading...</h2>
       </div>
     );
   }
-  const slug = (item?.title || item?.name).toLowerCase().replace(/\s+/g, '-')
+  const slug = (item?.title || item?.name).toLowerCase().replace(/\s+/g, "-");
 
   const bg = apiConfig.original_image(item.backdrop_path);
 
@@ -69,12 +78,14 @@ const MovieDetail = () => {
         </div>
         <div className="content__info">
           <div className="container">
-            {/* <h1>{item.title || item.name}</h1> */}
             <h1>
-              {item.title || item.name} (
-              {new Date(item.release_date).getFullYear() ||
-                new Date(item.first_air_date).getFullYear()}
-              )
+              {item.title || item.name} {""}
+              <span className="release__year">
+                (
+                {new Date(item.release_date).getFullYear() ||
+                  new Date(item.first_air_date).getFullYear()}
+                )
+              </span>
             </h1>
             <div className="genres">
               {item.genres &&
@@ -82,6 +93,26 @@ const MovieDetail = () => {
                   <span key={genre.id}>{genre.name}</span>
                 ))}
             </div>
+
+            <div className="row">
+              <div className="movie__rating">
+                <FaStar size={24} />
+                {item ? item.vote_average.toFixed(1) : ""}{" "}
+                {/* <span className="movie__voteCount">
+                  {item ? "(" + item.vote_count + ") votes" : ""}
+                </span> */}
+              </div>
+              <div className="watch__now">
+                <Link to={`/${category}/${item.id}-${slug}/watch`}>
+                  <FaPlay />
+                  Watch now
+                </Link>
+              </div>
+            </div>
+
+            <p className="tagline">
+              <em>{item.tagline}</em>
+            </p>
             <p>{item.overview}</p>
             <div className="release">
               {item.release_date ? (
@@ -102,18 +133,10 @@ const MovieDetail = () => {
             <div className="duration">
               {item.runtime && <p>Runtime: {item.runtime} minutes</p>}
             </div>
-            <div className="movie__rating">
-              <FaStar size={24} />
-              {item ? item.vote_average.toFixed(1) : ""}{" "}
-              {/* <span className="movie__voteCount">
-              {item
-                ? "(" + item.vote_count + ") votes"
-                : ""}
-            </span> */}
-            </div>
+
             <div className="casts">
               <div className="section__header">
-                <h2>Casts</h2>
+                <h2 style={{marginBottom:'1rem'}}>Casts</h2>
               </div>
               <CastList id={item.id} />
             </div>
@@ -121,11 +144,10 @@ const MovieDetail = () => {
         </div>
       </div>
 
-      <div className="watch__now">
-        <Link to={`/${category}/${item.id}-${slug}/watch`}>Watch now</Link>
-      </div>
-
       <div className="bottom__content">
+        <div className="mx-w760">
+          <h2>Trailer</h2>
+        </div>
         <div className="section trailer__section">
           <VideoList item={item} id={item.id} />
         </div>

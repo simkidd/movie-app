@@ -5,6 +5,7 @@ import apiConfig from "../../api/apiConfig";
 import "./watch.scss";
 import { category as cat } from "../../api/tmdbApi";
 import {ClipLoader} from 'react-spinners'
+import { BsChevronLeft } from "react-icons/bs";
 
 const Watch = () => {
   const { category, id } = useParams();
@@ -81,6 +82,7 @@ const Watch = () => {
       <div className="watch__container">
         <p className="back__to">
           <Link to={`/${category}/${item.id}`}>
+          <BsChevronLeft />
             Back to {`${category}`} info
           </Link>
         </p>
