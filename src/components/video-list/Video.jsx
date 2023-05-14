@@ -19,7 +19,7 @@ const Video = ({ item, showTrailer, trailerKey }) => {
       ) : (
         <div className="trailer__video">
           <div
-            style={{ width: "760px", height: "435px", background: "#111", display:'flex', alignItems:'center', justifyContent:'center', color:'grey' }}
+            style={{ width: "760px", height: "435px", background: "#222", display:'flex', alignItems:'center', justifyContent:'center', color:'grey' }}
           > Not available</div>
         </div>
       )}
