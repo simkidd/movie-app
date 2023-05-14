@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./movie-detail.scss";
 import { Link, useParams } from "react-router-dom";
 import tmdbApi from "../../api/tmdbApi";
@@ -15,7 +15,6 @@ const MovieDetail = () => {
   const [item, setItem] = useState(null);
   const [similarMovies, setSimilarMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const trailerSectionRef = useRef(null);
 
   useEffect(() => {
     const getDetail = async () => {
@@ -33,12 +32,6 @@ const MovieDetail = () => {
     getDetail();
     getSimilarMovies();
   }, [category, id]);
-
-  const scrollToTrailer = () => {
-    if (trailerSectionRef.current) {
-      trailerSectionRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   if (isLoading) {
     return (
@@ -96,7 +89,7 @@ const MovieDetail = () => {
             <div className="row">
               <div className="movie__rating">
                 <FaStar size={20} />
-                {item ? (item.vote_average).toFixed(1) : ""}
+                {item ? item.vote_average.toFixed(1) : ""}
               </div>
               <div className="watch__now">
                 <Link to={`/${category}/${item.id}-${slug}/watch`}>
@@ -137,7 +130,7 @@ const MovieDetail = () => {
 
             <div className="casts">
               <div className="section__header">
-                <h2 style={{marginBottom:'1rem'}}>Casts</h2>
+                <h2 style={{ marginBottom: "1rem" }}>Casts</h2>
               </div>
               <CastList id={item.id} />
             </div>

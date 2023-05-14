@@ -39,7 +39,6 @@ const Watch = () => {
       const episodeList = res.episodes; // Extract the list of episodes from the response
       setEpisodeData(episodeList);
       console.log(res);
-      // setIsEpisodeLoading(false);
     };
 
     getEpisodeData();
@@ -96,7 +95,7 @@ const Watch = () => {
         <div className="inner__container">
           <div className="watch">
             <div className="watch__player">
-              {item && (
+              {item ? (
                 <iframe
                   className="absolute w-full h-full top-0 left-0"
                   // src={embedMovie}
@@ -108,6 +107,20 @@ const Watch = () => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 ></iframe>
+              ) : (
+                <div
+                  style={{
+                    width: "760px",
+                    height: "435px",
+                    background: "#111",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "grey",
+                  }}
+                >
+                  Not available
+                </div>
               )}
               {/* <div className="playlist"></div> */}
 
@@ -131,10 +144,24 @@ const Watch = () => {
                           key={episode.episode_number}
                           value={episode.episode_number}
                         >
-                          Episode {episode.episode_number}
+                          Episode {episode.episode_number}: {episode.name}
                         </option>
                       ))}
                     </select>
+                  )}
+                </div>
+              )}
+
+              {category === cat.tv && (
+                <div className="episode__details">
+                  <p>Season {season}</p>
+                  {episodeData && episodeData.length > 0 && (
+                    <p>
+                      Episode {episode}: {episodeData[episode - 1].name}
+                    </p>
+                  )}
+                  {episodeData && episodeData.length > 0 && (
+                    <p>Overview: {episodeData[episode - 1].overview}</p>
                   )}
                 </div>
               )}
