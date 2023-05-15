@@ -4,7 +4,7 @@ import MovieCard from "../movie-card/MovieCard";
 import tmdbApi, { category as cat } from "../../api/tmdbApi";
 import { OutlineButton } from "../buttons/Button";
 // import Skeleton from "../skeleton/Skeleton";
-import {ClipLoader} from 'react-spinners'
+import { ClipLoader } from "react-spinners";
 
 const MovieGrid = ({ category }) => {
   const [items, setItems] = useState([]);
@@ -39,7 +39,7 @@ const MovieGrid = ({ category }) => {
   }, [category, page]);
 
   const handleLoadMore = async () => {
-    setIsLoadingMore(true)
+    setIsLoadingMore(true);
     try {
       let res = [];
       if (category === cat.movie) {
@@ -53,7 +53,7 @@ const MovieGrid = ({ category }) => {
       setItems(uniqueItems);
       // setItems(prevItems => [...prevItems, ...res.results]);
       setPage(page + 1);
-      setIsLoadingMore(false)
+      setIsLoadingMore(false);
     } catch (error) {
       console.log(error);
     }
@@ -74,7 +74,7 @@ const MovieGrid = ({ category }) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          flexDirection:'column'
+          flexDirection: "column",
         }}
       >
         <ClipLoader size={80} color={"#ff0000"} loading={isLoading} />
@@ -92,13 +92,13 @@ const MovieGrid = ({ category }) => {
         ))}
       </div>
       {isLoadingMore ? (
-        <div style={{textAlign:'center'}}>
+        <div style={{ textAlign: "center" }}>
           <ClipLoader size={30} color={"#ff0000"} loading={isLoadingMore} />
         </div>
       ) : (
         page < totalPages && (
           <div className="load__more">
-            <OutlineButton onClick={handleLoadMore} title={"Load more"} />
+            <OutlineButton onClick={handleLoadMore}>Load more</OutlineButton>
           </div>
         )
       )}

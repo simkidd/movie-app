@@ -32,7 +32,7 @@ const Search = () => {
           value={searchQuery}
           onChange={handleInputChange}
         />
-        <Button type="submit" className={"rounded"} title={<BsSearch size={14}/>} />
+        <Button type="submit"> {<BsSearch size={14}/>} </Button>
       </form>
     </div>
   );

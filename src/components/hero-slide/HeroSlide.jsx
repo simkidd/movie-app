@@ -20,7 +20,6 @@ const HeroSlide = () => {
       );
       const tvList = await tmdbApi.getTvList(category.tv, tvType.popular);
       const items = [...movieList.results, ...tvList.results];
-      console.log(movieList);
       setMovieItems(items);
     };
     getMovies();

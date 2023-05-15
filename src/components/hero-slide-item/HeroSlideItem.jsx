@@ -1,9 +1,9 @@
 import React from "react";
 import "./hero-slide-item.scss";
 import apiConfig from "../../api/apiConfig";
-import Button, { OutlineButton } from "../buttons/Button";
+import Button from "../buttons/Button";
 import { Link } from "react-router-dom";
-import { category as cat } from "../../api/tmdbApi";
+import {HiInformationCircle} from 'react-icons/hi'
 
 const HeroSlideItem = ({ item, activeClass, type }) => {
   const bg = apiConfig.original_image(item.backdrop_path);
@@ -25,7 +25,7 @@ const HeroSlideItem = ({ item, activeClass, type }) => {
           </p>
           <div className="btns">
             <Link to={`/${type}/${item.id}-${slug}`}>
-              <Button title="Watch now" />
+              <Button><HiInformationCircle /> More info</Button>
             </Link>
           </div>
         </div>
