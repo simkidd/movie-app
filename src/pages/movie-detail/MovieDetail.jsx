@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./movie-detail.scss";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import tmdbApi from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
 import MovieList from "../../components/movie-list/MovieList";
@@ -16,13 +16,18 @@ const MovieDetail = () => {
   const [similarMovies, setSimilarMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const location = useLocation();
+  // offset to top of page when open
+  useEffect(()=>{
+      window.scrollTo(0,0)
+  },[location.pathname])
+
   useEffect(() => {
     const getDetail = async () => {
       const res = await tmdbApi.detail(category, id);
       setItem(res);
       console.log(res);
       setIsLoading(false);
-      window.scrollTo(0, 0);
     };
 
     const getSimilarMovies = async () => {
