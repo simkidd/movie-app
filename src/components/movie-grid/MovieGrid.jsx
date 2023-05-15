@@ -12,6 +12,7 @@ const MovieGrid = ({ category }) => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   useEffect(() => {
     const getList = async () => {
@@ -26,15 +27,15 @@ const MovieGrid = ({ category }) => {
         // Filter out duplicate items
         const uniqueItems = removeDuplicates([...items, ...res.results], "id");
 
-        // setItems(res.results);
         setItems(uniqueItems);
-        // setItems(prevItems => [...prevItems, ...res.results]);
         setTotalPages(res.total_pages);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
+
+    
     getList();
   }, [category, page]);
 

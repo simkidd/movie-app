@@ -18,7 +18,7 @@ const SearchResults = ({ results, query }) => {
   return (
     <>
       <div className="catalog__header">
-        <h2>Search Results for "{query}"</h2>
+        <h2>Search Results for "{query}" ({filteredResults.length})</h2>
       </div>
       <div className="section flex">
         <div className="tab__buttons">

@@ -86,8 +86,8 @@ const tmdbApi = {
     const response = await axios.get(url);
     return response.data;
   },
-  getTvEpisodes: async (id, season, episode) => {
-    const url = `${base_url}/tv/${id}/season/${season}/episode/${episode}?api_key=${api_key}`;
+  discoverByGenre: async (category, genreId, sortBy, page = 1) => {
+    const url = `${base_url}/discover/${category}?api_key=${api_key}&with_genres=${genreId}&sort_by=${sortBy}&page=${page}`;
     const response = await axios.get(url);
     return response.data;
   },
