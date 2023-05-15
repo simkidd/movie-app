@@ -6,6 +6,7 @@ import "./watch.scss";
 import { category as cat } from "../../api/tmdbApi";
 import { ClipLoader } from "react-spinners";
 import { BsChevronLeft } from "react-icons/bs";
+import { FiChevronDown } from "react-icons/fi";
 
 const Watch = () => {
   const { category, id } = useParams();
@@ -95,7 +96,7 @@ const Watch = () => {
         <div className="inner__container">
           <div className="watch">
             <div className="watch__player">
-              {item ? (
+              {item && (
                 <iframe
                   className="absolute w-full h-full top-0 left-0"
                   // src={embedMovie}
@@ -107,48 +108,46 @@ const Watch = () => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 ></iframe>
-              ) : (
-                <div
-                  style={{
-                    width: "760px",
-                    height: "435px",
-                    background: "#222",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "grey",
-                  }}
-                >
-                  Not available
-                </div>
               )}
               {/* <div className="playlist"></div> */}
 
               {category === cat.tv && (
                 <div className="playlist">
-                  <select value={season} onChange={handleSeasonChange}>
-                    {item &&
-                      item.seasons.map((season) => (
-                        <option
-                          key={season.season_number}
-                          value={season.season_number}
-                        >
-                          Season {season.season_number}
-                        </option>
-                      ))}
-                  </select>
-                  {episodeData && episodeData.length > 0 && (
-                    <select value={episode} onChange={handleEpisodeChange}>
-                      {episodeData.map((episode) => (
-                        <option
-                          key={episode.episode_number}
-                          value={episode.episode_number}
-                        >
-                          Episode {episode.episode_number}: {episode.name}
-                        </option>
-                      ))}
+                  <div className="season">
+                    <select value={season} onChange={handleSeasonChange}>
+                      {item &&
+                        item.seasons.map((season) => {
+                          // Exclude Season 0 from the options
+                          if (season.season_number !== 0) {
+                            return (
+                              <option
+                                key={season.season_number}
+                                value={season.season_number}
+                              >
+                                Season {season.season_number}
+                              </option>
+                            );
+                          }
+                          return null;
+                        })}
                     </select>
-                  )}
+                    <FiChevronDown />
+                  </div>
+                  <div className="episodes">
+                    {episodeData && episodeData.length > 0 && (
+                      <select value={episode} onChange={handleEpisodeChange}>
+                        {episodeData.map((episode) => (
+                          <option
+                            key={episode.episode_number}
+                            value={episode.episode_number}
+                          >
+                            Episode {episode.episode_number}: {episode.name}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                    <FiChevronDown />
+                  </div>
                 </div>
               )}
 
@@ -161,7 +160,14 @@ const Watch = () => {
                     </p>
                   )}
                   {episodeData && episodeData.length > 0 && (
-                    <p>Overview: {episodeData[episode - 1].overview}</p>
+                    <>
+                      <p style={{ marginBottom: "0.5rem" }}>
+                        <strong>Overview:</strong>
+                      </p>
+                      <p>
+                        <em>{episodeData[episode - 1].overview}</em>
+                      </p>
+                    </>
                   )}
                 </div>
               )}
