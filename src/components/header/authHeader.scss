@@ -1,0 +1,31 @@
+.login__header {
+    width: 100%;
+    // position: fixed;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: unset;
+    height: 5rem;
+    z-index: 999;
+    top: 0;
+    left: 0;
+
+    .login__header__wrap {
+        display: flex;
+        padding: 0 2rem;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1180px;
+        margin: auto;
+        height: 100%;
+
+        a {
+
+            img {
+                width: 50px;
+            }
+        }
+    }
+
+}

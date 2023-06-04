@@ -113,9 +113,9 @@ const MovieDetail = () => {
                 <p>
                   <FaRegCalendar size={20} />
                   {new Date(item.release_date).toLocaleDateString("en-US", {
+                    year: "numeric",
                     month: "short",
                     day: "2-digit",
-                    year: "numeric",
                   })}
                 </p>
               ) : (
