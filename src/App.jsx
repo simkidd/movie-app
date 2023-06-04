@@ -12,6 +12,7 @@ import Login from "./pages/login/Login";
 import AuthLayout from "./Layouts/AuthLayout";
 import Register from "./pages/register/Register";
 import Landing from "./pages/landing/Landing";
+import Profile from "./pages/profile/Profile";
 
 const App = () => {
   const { searchQuery, searchResults } = useContext(MovieContext);
@@ -30,6 +31,7 @@ const App = () => {
               <SearchResults results={searchResults} query={searchQuery} />
             }
           />
+          <Route path="account/profile" element={<Profile />} />
           {/* <Route path="/:category/search" element={<SearchResults results={searchResults} query={searchQuery} />} /> */}
           <Route path="*" element={<NotFound />} />
         </Route>

@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./header.scss";
+import auth from "../../firebase";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { pathname } = useLocation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef();
+  const [currentUser, setCurrentUser] = useState(null);
 
   window.scrollTo(0, 0);
 
@@ -20,15 +23,37 @@ const Header = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   const handleLogout = () => {
     // Add your logout logic here
-    // For example, clear user session, redirect to login page, etc.
+    // For example, call the Firebase sign out method
+    auth.signOut();
   };
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen)
-    console.log("dropdown toggle")
+    setIsDropdownOpen(!isDropdownOpen);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target))
+        setIsDropdownOpen(false);
+    };
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.addEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   const avatarImage =
     "https://res.cloudinary.com/demo/image/upload/w_100,h_100,c_thumb,g_face,r_20,d_avatar.png/non_existing_id.png";
@@ -52,27 +77,28 @@ const Header = () => {
             </li>
           </ul>
 
-          <div className="header__avatar">
-            <img
-              src={avatarImage}
-              alt="avatar"
-              className="avatar__image"
+          {currentUser ? (
+            <div
+              className="header__avatar"
               onClick={toggleDropdown}
-            />
+              ref={dropdownRef}
+            >
+              <img src={avatarImage} alt="avatar" className="avatar__image" />
 
-            {isDropdownOpen && (
-              <div className="avatar__dropdown">
-                <ul>
-                  <li>
-                    <Link to="/profile">Profile</Link>
-                  </li>
-                  <li>
+              {isDropdownOpen && (
+                <div className="avatar__dropdown">
+                  <div className="dropdown__item">
+                    <Link to="/account/profile">Profile</Link>
+                  </div>
+                  <div className="dropdown__item">
                     <button onClick={handleLogout}>Logout</button>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link to="/account/login">Sign In</Link>
+          )}
         </div>
       </div>
     </div>

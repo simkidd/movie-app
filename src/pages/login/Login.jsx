@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./login.scss";
 import Bg from "../../assets/movie-login-bg.jpg";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import auth from "../../firebase";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import { ClipLoader } from "react-spinners";
@@ -27,6 +27,21 @@ const Login = () => {
     } catch (error) {
       setError(error.message);
     } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      // User has logged in successfully with Google
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
       setIsLoading(false);
     }
   };
@@ -96,6 +111,13 @@ const Login = () => {
                 New here?
                 <Link to="/account/register">Sign up now.</Link>
               </p>
+            </div>
+
+            <div className="login__form__bottom">
+              <p>Or sign in with:</p>
+              <button className="btn__google" onClick={handleGoogleSignIn}>
+                Google
+              </button>
             </div>
           </div>
         </div>
