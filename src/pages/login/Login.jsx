@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./login.scss";
-import Bg from "../../assets/movie-login-bg.jpg";
+import Bg from "../../assets/Screenshot 2023-06-05 013736.png";
 import { Link, useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
