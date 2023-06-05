@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import Meta from "../../components/helmet/Meta";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -40,6 +41,8 @@ const Register = () => {
   };
 
   return (
+    <>
+    <Meta title={"Create an account | NetReelz"} />
     <div className="login__container">
       <div className="login__container__bg">
         <img src={Bg} alt="" />
@@ -107,6 +110,7 @@ const Register = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

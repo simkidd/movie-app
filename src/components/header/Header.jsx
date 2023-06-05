@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./header.scss";
 import auth from "../../firebase";
+import { FaPlay } from "react-icons/fa";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -55,15 +56,17 @@ const Header = () => {
     };
   }, []);
 
-  const avatarImage =
-    "https://res.cloudinary.com/demo/image/upload/w_100,h_100,c_thumb,g_face,r_20,d_avatar.png/non_existing_id.png";
+  const avatarImage = currentUser
+    ? currentUser.photoUrl
+    : "https://res.cloudinary.com/demo/image/upload/w_100,h_100,c_thumb,g_face,r_20,d_avatar.png/non_existing_id.png";
 
   return (
     <div className={`header ${isScrolled ? "scrolled" : ""}`}>
       <div className="header__container">
         <div className="header__logo">
           <Link to="/">
-            <img src="logo.png" alt="logo" />
+            <h1 className="brand">netReelz</h1>
+            {/* <img src="logo.png" alt="logo" /> */}
           </Link>
         </div>
 
@@ -97,7 +100,9 @@ const Header = () => {
               )}
             </div>
           ) : (
-            <Link to="/account/login">Sign In</Link>
+            <Link to="/account/login" className="btn small sign__in">
+              Sign In
+            </Link>
           )}
         </div>
       </div>

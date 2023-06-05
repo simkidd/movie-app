@@ -47,7 +47,7 @@
                 display: flex;
                 flex-direction: column;
                 width: 100%;
-                padding: 60px 68px;
+                padding: 40px 40px;
 
                 .login__form__header {
                     font-size: 2rem;
@@ -58,8 +58,9 @@
 
                 .form {
                     margin-top: 1rem;
+
                     .input__placement {
-                        margin-bottom: 1.5rem;
+                        margin-bottom: 1rem;
 
                         .text__control {
                             position: relative;
@@ -109,11 +110,12 @@
                         }
                     }
 
+
                     .psw__control {
                         position: relative;
                         display: flex;
 
-                        .psw__field{
+                        .psw__field {
                             padding-right: 3.2rem !important;
                         }
 
@@ -138,7 +140,7 @@
                 .btn__login {
                     width: 100%;
                     padding: 0.75rem 1.5rem;
-                    margin-top: 2rem;
+                    margin-top: 1.5rem;
                     background-color: #ff0000;
                     box-shadow: 0px 0px 7px 5px #ff00004d;
                     transition: box-shadow 0.3s ease;
@@ -156,11 +158,32 @@
                         box-shadow: 0px 0px 7px 8px #ff00004d;
                     }
                 }
+
+                .login__form__help {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-top: 1.5rem;
+
+                    .remember__me {}
+
+                    .forgot__psw {
+                        &:hover {
+                            color: #ff0000;
+                        }
+                    }
+                }
             }
 
             .login__form__bottom {
                 width: 100%;
-                margin-top: 4rem;
+                margin-top: 2rem;
+                display: flex;
+                flex-direction: column;
+
+                &:not(:first-of-type) {
+                    margin-top: 1rem;
+                }
 
                 p {
                     color: #737373;
@@ -175,6 +198,67 @@
                         &:hover {
                             color: #ff0000;
                         }
+                    }
+                }
+
+                .or__hr {
+                    display: flex;
+                    -webkit-box-align: center;
+                    align-items: center;
+                    width: 100%;
+                    margin: 20px 0px;
+                    color: #737373;
+                    &::before, &::after {
+                        content: "";
+                        flex: 1 1 10%;
+                        border-bottom: 1px solid #737373;;
+                        margin: 0px 10px;
+                        transform: translateY(-50%);
+                    }
+                }
+
+                .google-btn {
+                    width: 184px;
+                    height: 42px;
+                    background-color: #4285f4;
+                    border-radius: 2px;
+                    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .25);
+                    cursor: pointer;
+                    align-self: center;
+
+                    .google-icon-wrapper {
+                        position: absolute;
+                        margin-top: 1px;
+                        margin-left: 1px;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 2px;
+                        background-color: #fff;
+                    }
+
+                    .google-icon {
+                        position: absolute;
+                        margin-top: 11px;
+                        margin-left: 11px;
+                        width: 18px;
+                        height: 18px;
+                    }
+
+                    .btn-text {
+                        float: right;
+                        margin: 11px 11px 0 0;
+                        color: #fff;
+                        font-size: 14px;
+                        letter-spacing: 0.2px;
+                        font-family: "Roboto";
+                    }
+
+                    &:hover {
+                        box-shadow: 0 0 6px #4285f4;
+                    }
+
+                    &:active {
+                        background: #1669f2;
                     }
                 }
             }

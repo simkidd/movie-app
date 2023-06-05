@@ -19,8 +19,9 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout />}>
-        {/* <Route element={<Landing />} /> */}
+        <Route path="/" element={<Landing />} />
+
+        {/* <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/:category/:id" element={<MovieDetail />} />
@@ -32,9 +33,8 @@ const App = () => {
             }
           />
           <Route path="account/profile" element={<Profile />} />
-          {/* <Route path="/:category/search" element={<SearchResults results={searchResults} query={searchQuery} />} /> */}
           <Route path="*" element={<NotFound />} />
-        </Route>
+        </Route> */}
         <Route path="/account" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />

@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import "./login.scss";
 import Bg from "../../assets/movie-login-bg.jpg";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import auth from "../../firebase";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import { ClipLoader } from "react-spinners";
+import Meta from "../../components/helmet/Meta";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -51,78 +56,99 @@ const Login = () => {
   };
 
   return (
-    <div className="login__container">
-      <div className="login__container__bg">
-        <img src={Bg} alt="" />
-      </div>
+    <>
+      <Meta title={"Login | NetReelz"} />
+      <div className="login__container">
+        <div className="login__container__bg">
+          <img src={Bg} alt="" />
+        </div>
 
-      <div className="login__body">
-        <div className="login__content">
-          <div className="login__form">
-            <h1 className="login__form__header">Sign In</h1>
-            {error && <p className="error">{error}</p>}
-            <form onSubmit={handleLogin} className="form">
-              <div className="input__placement">
-                <div className="text__control">
-                  <label className="input__id" placeholder>
-                    <input
-                      type="email"
-                      className="text__field"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <label htmlFor="" className="place__label">
-                      Email
+        <div className="login__body">
+          <div className="login__content">
+            <div className="login__form">
+              <h1 className="login__form__header">Sign In</h1>
+              {error && <p className="error">{error}</p>}
+              <form onSubmit={handleLogin} className="form">
+                <div className="input__placement">
+                  <div className="text__control">
+                    <label className="input__id" placeholder>
+                      <input
+                        type="email"
+                        className="text__field"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                      <label htmlFor="" className="place__label">
+                        Email
+                      </label>
                     </label>
-                  </label>
+                  </div>
                 </div>
+
+                <div className="input__placement">
+                  <div className="psw__control text__control">
+                    <label className="input__id" placeholder>
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        className="text__field psw__field"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                      <label htmlFor="" className="place__label">
+                        Password
+                      </label>
+                    </label>
+                    <span className="psw__toggle" onClick={togglePswShow}>
+                      {showPassword ? <BsEyeSlash /> : <BsEye />}
+                    </span>
+                  </div>
+                </div>
+
+                <button className="btn__login">
+                  {isLoading ? (
+                    <ClipLoader size={18} color={"#fff"} loading={isLoading} />
+                  ) : (
+                    "Sign In"
+                  )}
+                </button>
+
+                <div className="login__form__help">
+                  <div className="remember__me">
+                    <input type="checkbox" name="" id="" />
+                    <label htmlFor="">Remember me</label>
+                  </div>
+                  <Link to="" className="forgot__psw">
+                    Forgot password?
+                  </Link>
+                </div>
+              </form>
+
+              <div className="login__form__bottom">
+                <p>
+                  New here?
+                  <Link to="/account/register">Sign up now.</Link>
+                </p>
               </div>
 
-              <div className="input__placement">
-                <div className="psw__control text__control">
-                  <label className="input__id" placeholder>
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      className="text__field psw__field"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+              <div className="login__form__bottom">
+                <div className="or__hr">Or</div>
+                <div class="google-btn" onClick={handleGoogleSignIn}>
+                  <div class="google-icon-wrapper">
+                    <img
+                      class="google-icon"
+                      src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
                     />
-                    <label htmlFor="" className="place__label">
-                      Password
-                    </label>
-                  </label>
-                  <span className="psw__toggle" onClick={togglePswShow}>
-                  {showPassword ? <BsEyeSlash /> : <BsEye />}
-                  </span>
+                  </div>
+                  <p class="btn-text">
+                    <b>Sign in with google</b>
+                  </p>
                 </div>
               </div>
-
-              <button className="btn__login">
-                {isLoading ? (
-                  <ClipLoader size={18} color={"#fff"} loading={isLoading} />
-                ) : (
-                  "Sign In"
-                )}
-              </button>
-            </form>
-
-            <div className="login__form__bottom">
-              <p>
-                New here?
-                <Link to="/account/register">Sign up now.</Link>
-              </p>
-            </div>
-
-            <div className="login__form__bottom">
-              <p>Or sign in with:</p>
-              <button className="btn__google" onClick={handleGoogleSignIn}>
-                Google
-              </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
