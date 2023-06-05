@@ -10,7 +10,7 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef();
   const [currentUser, setCurrentUser] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   window.scrollTo(0, 0);
 
@@ -36,10 +36,14 @@ const Header = () => {
   }, []);
 
   const handleLogout = () => {
-    // Add your logout logic here
-    // For example, call the Firebase sign out method
-    auth.signOut();
-    navigate('/')
+    auth
+      .signOut()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log("Logout error:", error);
+      });
   };
 
   const toggleDropdown = () => {
