@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./Layouts/Layout";
 import Home from "./pages/home/Home";
@@ -13,28 +13,43 @@ import AuthLayout from "./Layouts/AuthLayout";
 import Register from "./pages/register/Register";
 import Landing from "./pages/landing/Landing";
 import Profile from "./pages/profile/Profile";
+import auth from "./firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const App = () => {
   const { searchQuery, searchResults } = useContext(MovieContext);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  React.useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Landing />} />
-
-        {/* <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/:category/:id" element={<MovieDetail />} />
-          <Route path="/:category/:id/watch" element={<Watch />} />
-          <Route
-            path="/search"
-            element={
-              <SearchResults results={searchResults} query={searchQuery} />
-            }
-          />
-          <Route path="account/profile" element={<Profile />} />
-          <Route path="*" element={<NotFound />} />
-        </Route> */}
+        {!currentUser ? (
+          <Route path="/" element={<Landing />} />
+        ) : (
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/:category/:id" element={<MovieDetail />} />
+            <Route path="/:category/:id/watch" element={<Watch />} />
+            <Route
+              path="/search"
+              element={
+                <SearchResults results={searchResults} query={searchQuery} />
+              }
+            />
+            <Route path="account/profile" element={<Profile />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        )}
         <Route path="/account" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
