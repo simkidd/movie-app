@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./header.scss";
 import auth from "../../firebase";
 import { FaPlay } from "react-icons/fa";
@@ -10,6 +10,7 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef();
   const [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate()
 
   window.scrollTo(0, 0);
 
@@ -38,6 +39,7 @@ const Header = () => {
     // Add your logout logic here
     // For example, call the Firebase sign out method
     auth.signOut();
+    navigate('/')
   };
 
   const toggleDropdown = () => {
