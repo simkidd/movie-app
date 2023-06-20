@@ -98,7 +98,7 @@ const Header = () => {
               {isDropdownOpen && (
                 <div className="avatar__dropdown">
                   <div className="dropdown__item">
-                    <Link to="/account/profile">Profile</Link>
+                    <Link to="/profile">Profile</Link>
                   </div>
                   <div className="dropdown__item">
                     <button onClick={handleLogout}>Logout</button>

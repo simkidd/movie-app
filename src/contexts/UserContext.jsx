@@ -7,35 +7,28 @@ const UserProvider = ({ children }) => {
   const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const user = auth.currentUser;
-        if (user !== null) {
-          // The user object has basic properties such as display name, email, etc.
-          const displayName = user.displayName;
-          const email = user.email;
-          const photoURL = user.photoURL;
-          const emailVerified = user.emailVerified;
-          const uid = user.uid;
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        const { displayName, email, photoURL, emailVerified, uid } = user;
 
-          // Create the userProfile object
-          const userProfile = {
-            displayName,
-            email,
-            photoURL,
-            emailVerified,
-            uid,
-          };
+        const userProfile = {
+          displayName,
+          email,
+          photoURL,
+          emailVerified,
+          uid,
+        };
 
-          setUserProfile(userProfile);
-        }
-      } catch (error) {
-        console.log("Error fetching user profile:", error);
+        setUserProfile(userProfile);
+      } else {
+        setUserProfile(null);
       }
-    };
+    });
 
-    fetchUserProfile();
+    return () => unsubscribe();
   }, []);
+
+  console.log(userProfile);
 
   return (
     <UserContext.Provider value={{ userProfile }}>

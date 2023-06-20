@@ -7,6 +7,7 @@ import "./home.scss";
 import { OutlineButton } from "../../components/buttons/Button";
 import { category } from "../../api/tmdbApi";
 import { ClipLoader } from "react-spinners";
+import Meta from "../../components/helmet/Meta";
 
 const Home = () => {
   const {
@@ -41,6 +42,7 @@ const Home = () => {
 
   return (
     <>
+    <Meta title="Netreelz" />
       <HeroSlide />
       <div className="home__container">
         <div className="section">

@@ -9,7 +9,8 @@ const Footer = () => {
         <div className="content__logo">
           <div className="logo">
             <Link to="/">
-              <img src="logo.png" alt="logo" />
+              {/* <img src="logo.png" alt="logo" /> */}
+              <h1 className="brand">netReelz</h1>
             </Link>
           </div>
         </div>

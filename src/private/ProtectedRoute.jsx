@@ -1,6 +1,6 @@
 import React from "react";
-import auth from "../firebase";
 import { Navigate, Outlet } from "react-router-dom";
+import auth from "../firebase";
 
 const ProtectedRoute = () => {
   const { currentUser } = auth;

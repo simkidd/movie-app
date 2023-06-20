@@ -7,10 +7,10 @@ import UserProvider from "./contexts/UserContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <MovieProvider>
-      <UserProvider>
+    <UserProvider>
+      <MovieProvider>
         <App />
-      </UserProvider>
-    </MovieProvider>
+      </MovieProvider>
+    </UserProvider>
   </React.StrictMode>
 );

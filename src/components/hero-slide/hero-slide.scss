@@ -1,9 +1,12 @@
-.hero__slide{
+.hero__slide {
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
 
-    .swiper{
+    .swiper {
         height: 100%;
 
-        .swiper-slide{
+        .swiper-slide {
             height: 100%;
         }
     }
