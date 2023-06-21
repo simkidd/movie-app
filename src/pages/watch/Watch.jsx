@@ -58,10 +58,8 @@ const Watch = () => {
 
   const { embed_to } = apiConfig;
 
-  // const embedMovie = `${embed_to}/movie?id=${id}`;
-  // const embedTV = `${embed_to}/tv?id=${id}&s=${season}&e=${episode}`;
-  const embedMovie = `${embed_to}/se_player.php?video_id=${id}&tmdb=1`;
-  const embedTV = `${embed_to}/se_player.php?video_id=${id}&tmdb=1&s=${season}&e=${episode}`;
+  const embedMovie = `${embed_to}/movie?id=${id}`;
+  const embedTV = `${embed_to}/tv?id=${id}&s=${season}&e=${episode}`;
 
   const bg = apiConfig.original_image(item.backdrop_path);
 
